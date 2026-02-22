@@ -1,0 +1,2221 @@
+/* === Pokémon Theme Variables === */
+:root {
+  --pball-red: #E3350D;
+  --pball-red-dark: #c42e0b;
+  --pball-white: #ffffff;
+  --pball-black: #212121;
+  --pball-yellow: #FFCB05;
+  --pball-blue: #30A7D7;
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: #1f2937;
+  --text-primary: #e8e8e8;
+  --text-secondary: #8b949e;
+  --hp-green: #4ade80;
+  --hp-yellow: #facc15;
+  --hp-red: #f87171;
+  --code-green: #7ee787;
+  --code-blue: #79c0ff;
+  --code-purple: #d2a8ff;
+  --code-orange: #ffa657;
+  --code-pink: #ff7b72;
+  --terminal-green: #00ff41;
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-body: 'Nunito', sans-serif;
+  --font-code: 'Fira Code', 'JetBrains Mono', monospace;
+
+  /* === Aliases (referenced throughout but previously undefined) === */
+  --primary: #30A7D7;
+  /* Pokémon blue  */
+  --accent: #FFCB05;
+  /* Pokémon yellow */
+  --accent-light: #ffe066;
+  /* Lighter yellow */
+  --success: #4ade80;
+  /* HP green       */
+  --border: rgba(255, 255, 255, 0.12);
+  /* Subtle card border */
+  --font-main: 'Nunito', sans-serif;
+  --font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+}
+
+/* === Reset === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 50%, var(--bg-primary) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.4s;
+  position: relative;
+}
+
+/* Animated grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 203, 5, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 203, 5, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* === Flash Overlay (Wild Encounter) === */
+.flash-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.flash-overlay.flash {
+  animation: wildFlash 0.6s ease-out forwards;
+}
+
+@keyframes wildFlash {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.flash-overlay.evolve-flash {
+  background: var(--pball-blue);
+  animation: evolveFlash 0.5s ease-out forwards;
+}
+
+@keyframes evolveFlash {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.35;
+  }
+
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* === Pokéball Theme Toggle === */
+.pball-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.3s;
+}
+
+.pball-toggle:hover {
+  transform: scale(1.15) rotate(15deg);
+}
+
+.pball-toggle:active .pball {
+  animation: pballWobble 0.3s ease;
+}
+
+/* === Music Toggle Button === */
+.music-toggle {
+  position: fixed;
+  top: 1.5rem;
+  right: 5.5rem;
+  z-index: 100;
+  background: var(--pball-red);
+  border: 3px solid var(--pball-black);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.music-toggle:hover {
+  transform: scale(1.15);
+  background: var(--pball-red-dark);
+}
+
+.music-toggle:active {
+  transform: scale(0.95);
+}
+
+.music-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.music-toggle.playing .music-icon {
+  animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.pball {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 3px var(--pball-black),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.pball-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--pball-red);
+}
+
+.pball-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--pball-white);
+}
+
+.pball-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--pball-white);
+  border: 3px solid var(--pball-black);
+  box-shadow: inset 0 0 0 2px var(--pball-black);
+}
+
+/* === Background Pokémon === */
+.pokemon-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-pokemon {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  opacity: 0.35;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.bg-pokemon.poke-hover {
+  opacity: 0.85;
+  filter: drop-shadow(0 0 10px var(--pball-yellow)) brightness(1.4);
+}
+
+.bg-pokemon.evolving {
+  animation: evolveGlow 0.8s ease-out;
+}
+
+@keyframes evolveGlow {
+  0% {
+    opacity: 1;
+    filter: brightness(3) drop-shadow(0 0 12px #fff);
+    transform: scale(1.4);
+  }
+
+  50% {
+    opacity: 0.8;
+    filter: brightness(2) drop-shadow(0 0 20px var(--pball-blue));
+    transform: scale(1.6);
+  }
+
+  100% {
+    opacity: 0.35;
+    filter: none;
+    transform: scale(1);
+  }
+}
+
+.bg-pokemon.catching {
+  animation: none !important;
+  transition: transform 0.4s ease-in, opacity 0.4s ease-in;
+}
+
+.bg-pokemon.caught {
+  transform: scale(0) !important;
+  opacity: 0 !important;
+}
+
+.bg-pokemon.caught-return {
+  animation: caughtReturn 0.6s ease-out forwards;
+}
+
+@keyframes caughtReturn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+}
+
+/* === Thrown Pokéball === */
+.thrown-pball {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  z-index: 50;
+  pointer-events: none;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px var(--pball-black), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.thrown-pball .tp-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--pball-red);
+}
+
+.thrown-pball .tp-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--pball-white);
+}
+
+.thrown-pball .tp-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pball-white);
+  border: 2px solid var(--pball-black);
+  z-index: 1;
+}
+
+.thrown-pball.throwing {
+  animation: pballSpin 0.5s linear;
+}
+
+@keyframes pballSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(720deg);
+  }
+}
+
+.thrown-pball.wobble {
+  animation: catchWobble 0.4s ease-in-out;
+}
+
+@keyframes catchWobble {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-20deg);
+  }
+
+  75% {
+    transform: rotate(20deg);
+  }
+}
+
+.thrown-pball.catch-success {
+  animation: catchSuccess 0.3s ease-out forwards;
+}
+
+@keyframes catchSuccess {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.3);
+    filter: brightness(2);
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* === Catch Sparkles === */
+.catch-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 51;
+  font-size: 1rem;
+  animation: sparkleExplode 0.6s ease-out forwards;
+}
+
+@keyframes sparkleExplode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--sx), var(--sy)) scale(0);
+    opacity: 0;
+  }
+}
+
+.bg-pokemon.pika {
+  left: 5%;
+  top: 12%;
+  animation: floatBounce 4s ease-in-out infinite;
+}
+
+.bg-pokemon.char {
+  right: 8%;
+  top: 20%;
+  animation: floatBounce 5s ease-in-out 0.5s infinite;
+}
+
+.bg-pokemon.eevee {
+  left: 3%;
+  bottom: 25%;
+  animation: floatBounce 4.5s ease-in-out 1s infinite;
+}
+
+.bg-pokemon.squirtle {
+  right: 5%;
+  bottom: 18%;
+  animation: floatBounce 5.5s ease-in-out 0.3s infinite;
+}
+
+.bg-pokemon.bulba {
+  left: 15%;
+  top: 45%;
+  animation: floatBounce 4.2s ease-in-out 0.7s infinite;
+}
+
+.bg-pokemon.jiggly {
+  right: 12%;
+  top: 55%;
+  animation: floatBounce 5.2s ease-in-out 0.2s infinite;
+}
+
+.bg-pokemon.pidgey {
+  left: 8%;
+  bottom: 8%;
+  animation: floatBounce 3.8s ease-in-out 0.4s infinite;
+}
+
+.bg-pokemon.clefairy {
+  right: 18%;
+  bottom: 35%;
+  animation: floatBounce 4.8s ease-in-out 0.9s infinite;
+}
+
+@keyframes floatBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
+}
+
+/* === Sparkles === */
+.sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 0.6rem;
+  color: var(--pball-yellow);
+  opacity: 0.3;
+  animation: sparkleFloat 8s infinite ease-in-out;
+  filter: drop-shadow(0 0 3px var(--pball-yellow));
+}
+
+.sparkle:nth-child(1) {
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+}
+
+.sparkle:nth-child(2) {
+  left: 85%;
+  top: 15%;
+  animation-delay: 1.5s;
+}
+
+.sparkle:nth-child(3) {
+  left: 50%;
+  top: 80%;
+  animation-delay: 3s;
+}
+
+.sparkle:nth-child(4) {
+  left: 25%;
+  top: 60%;
+  animation-delay: 2s;
+}
+
+.sparkle:nth-child(5) {
+  left: 75%;
+  top: 70%;
+  animation-delay: 4s;
+}
+
+@keyframes sparkleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+/* === Container === */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  position: relative;
+}
+
+/* === Trainer Card === */
+.trainer-card {
+  text-align: center;
+  padding: 2.5rem 0;
+  animation: cardReveal 0.8s ease-out backwards;
+}
+
+.trainer-card-inner {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1f2937 100%);
+  border: 4px solid var(--pball-red);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow:
+    inset 0 0 0 2px var(--pball-yellow),
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(227, 53, 13, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.trainer-card-inner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent 30%,
+      rgba(255, 203, 5, 0.05) 50%,
+      transparent 70%);
+  animation: cardShine 3s ease-in-out infinite;
+}
+
+@keyframes cardShine {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+.avatar-wrapper {
+  margin-bottom: 1.25rem;
+}
+
+.pball-frame {
+  display: inline-block;
+  padding: 6px;
+  background: linear-gradient(135deg, var(--pball-red) 0%, #ff4500 100%);
+  border-radius: 50%;
+  border: 3px solid var(--pball-black);
+  animation: pballIdle 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(227, 53, 13, 0.5);
+}
+
+@keyframes pballIdle {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(227, 53, 13, 0.5);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(227, 53, 13, 0.8);
+  }
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--pball-white) 0%, var(--pball-white) 50%, var(--pball-red) 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-pixel);
+  font-size: 1.5rem;
+  color: var(--pball-black);
+  border: 2px solid var(--pball-black);
+}
+
+.avatar-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.trainer-name {
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--pball-yellow), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.8;
+}
+
+.trainer-title {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.trainer-location {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.trainer-bio {
+  max-width: 420px;
+  margin: 0 auto 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.trainer-badge {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--pball-yellow);
+  color: var(--pball-black);
+  border-radius: 4px;
+  border: 2px solid var(--pball-black);
+  animation: badgeBounce 0.5s ease 0.8s backwards;
+}
+
+@keyframes badgeBounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* === Section Titles === */
+.section-title {
+  font-family: var(--font-main);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1.2em;
+  background: linear-gradient(180deg, var(--pball-yellow), var(--primary));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* === Project Stack === */
+.project-stack {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.project-counter {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.current-project {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.project-cards-container {
+  position: relative;
+  height: 450px;
+  perspective: 1000px;
+}
+
+.project-card {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1f2937 100%);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(100%) scale(0.9) rotateY(20deg);
+  pointer-events: none;
+}
+
+.project-card.active {
+  opacity: 1;
+  transform: translateX(0) scale(1) rotateY(0deg);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.project-card.prev {
+  opacity: 0.3;
+  transform: translateX(-100%) scale(0.9) rotateY(-20deg);
+  z-index: 1;
+}
+
+.project-card.next {
+  opacity: 0.3;
+  transform: translateX(100%) scale(0.9) rotateY(20deg);
+  z-index: 1;
+}
+
+.project-card.swiping-left {
+  transform: translateX(-120%) scale(0.8) rotateY(-30deg);
+  opacity: 0;
+}
+
+.project-card.swiping-right {
+  transform: translateX(120%) scale(0.8) rotateY(30deg);
+  opacity: 0;
+}
+
+.project-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(59, 130, 246, 0.15) 45%,
+      rgba(139, 92, 246, 0.1) 50%,
+      rgba(59, 130, 246, 0.15) 55%,
+      transparent 60%,
+      transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-card:hover .project-glow {
+  opacity: 1;
+  animation: holoShine 1.2s ease-in-out;
+}
+
+@keyframes holoShine {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.project-inner {
+  padding: 2rem;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-type {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.project-status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--success);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--success);
+  border-radius: 4px;
+}
+
+.project-name {
+  font-family: var(--font-main);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.project-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.project-features {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.project-features li {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-primary);
+}
+
+.feature-type {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  background: var(--bg-card);
+  border-radius: 4px;
+  min-width: 80px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--accent-light);
+  border: 1px solid var(--border);
+}
+
+.project-footer {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.project-tech {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+
+.project-tech::before {
+  content: '◆ ';
+  color: var(--primary);
+}
+
+/* Project Navigation */
+.project-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.project-nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-nav-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.project-nav-btn:active {
+  transform: scale(0.95);
+}
+
+.project-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.project-nav-btn:disabled:hover {
+  background: var(--bg-secondary);
+  color: var(--primary);
+  transform: scale(1);
+  box-shadow: none;
+}
+
+.swipe-hint {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* === Stats (HP Bars) === */
+.stats-section {
+  margin-bottom: 2rem;
+  animation: cardReveal 0.8s ease-out 0.15s backwards;
+}
+
+.hp-bars {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a2332 100%);
+  border: 3px solid var(--pball-black);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 203, 5, 0.1);
+  position: relative;
+}
+
+.hp-stat {
+  margin-bottom: 1rem;
+}
+
+.hp-stat:last-child {
+  margin-bottom: 0;
+}
+
+.hp-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--text-primary);
+}
+
+.hp-value {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.hp-track {
+  height: 12px;
+  background: var(--pball-black);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hp-fill {
+  height: 100%;
+  border-radius: 6px;
+  width: 0;
+  background: linear-gradient(90deg, var(--hp-green), #22c55e, #10b981);
+  transition: width 1s ease-out;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.hp-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: hpShine 2s ease-in-out infinite;
+}
+
+@keyframes hpShine {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 200%;
+  }
+}
+
+.hp-fill.animated {
+  width: var(--fill-width, 90%);
+}
+
+.hp-track {
+  position: relative;
+}
+
+.hp-track::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(100% + 8px));
+  font-size: 0.7rem;
+  color: var(--hp-green);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.5s 0.8s;
+}
+
+.hp-track.labeled::after {
+  opacity: 1;
+}
+
+/* === Pokémon Card (Project) === */
+.section {
+  margin-bottom: 2rem;
+  animation: cardReveal 0.8s ease-out backwards;
+}
+
+.section:nth-of-type(1) {
+  animation-delay: 0.2s;
+}
+
+.section:nth-of-type(2) {
+  animation-delay: 0.25s;
+}
+
+.section:nth-of-type(3) {
+  animation-delay: 0.3s;
+}
+
+.section:nth-of-type(4) {
+  animation-delay: 0.35s;
+}
+
+.section:nth-of-type(5) {
+  animation-delay: 0.4s;
+}
+
+.section:nth-of-type(6) {
+  animation-delay: 0.45s;
+}
+
+.pokecard {
+  position: relative;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1f2937 100%);
+  border: 4px solid var(--pball-blue);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pokecard::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--pball-blue), var(--pball-yellow), var(--pball-red), var(--pball-blue));
+  background-size: 300% 300%;
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: borderGlow 3s ease infinite;
+}
+
+@keyframes borderGlow {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.pokecard:hover::before {
+  opacity: 0.6;
+}
+
+.pokecard:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 32px rgba(48, 167, 215, 0.3);
+}
+
+.pokecard-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(255, 203, 5, 0.15) 45%,
+      rgba(48, 167, 215, 0.1) 50%,
+      rgba(255, 203, 5, 0.15) 55%,
+      transparent 60%,
+      transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pokecard:hover .pokecard-glow {
+  opacity: 1;
+  animation: holoShine 1.2s ease-in-out;
+}
+
+@keyframes holoShine {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.pokecard-inner {
+  padding: 1.5rem;
+  position: relative;
+}
+
+.pokecard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.pokecard-type {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--pball-yellow);
+  color: var(--pball-black);
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.pokecard-hp {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--hp-green);
+}
+
+.pokecard-name {
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  color: var(--pball-blue);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.pokecard-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.pokecard-moves {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.pokecard-moves li {
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.move-type {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--bg-card);
+  border-radius: 4px;
+  min-width: 60px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.pokecard-footer {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.pokecard-weakness::before {
+  content: "⚡ ";
+}
+
+.pokecard-resistance::before {
+  content: "🛡 ";
+}
+
+/* === Moveset (Skills) === */
+.moves-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.move-category {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a2332 100%);
+  border: 3px solid var(--pball-black);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.move-category::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 203, 5, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.move-category:hover::before {
+  left: 100%;
+}
+
+.move-category:hover {
+  border-color: var(--pball-yellow);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(255, 203, 5, 0.3);
+}
+
+.move-category h4 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.move-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.move-badge {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #374151 100%);
+  border: 2px solid var(--pball-black);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.move-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 203, 5, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.move-badge:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+.move-badge:hover {
+  background: linear-gradient(135deg, var(--pball-yellow) 0%, #ffd700 100%);
+  color: var(--pball-black);
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 203, 5, 0.5);
+}
+
+/* === Training Cards === */
+.training-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.training-card {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a2332 100%);
+  border: 3px solid var(--pball-black);
+  border-radius: 12px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.training-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(74, 222, 128, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.training-card:hover::after {
+  opacity: 1;
+}
+
+.training-card:hover {
+  border-color: var(--hp-green);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(74, 222, 128, 0.3);
+}
+
+.training-icon {
+  font-size: 1.75rem;
+  animation: iconWiggle 2s ease-in-out infinite;
+}
+
+.training-card:nth-child(1) .training-icon {
+  animation-delay: 0s;
+}
+
+.training-card:nth-child(2) .training-icon {
+  animation-delay: 0.3s;
+}
+
+.training-card:nth-child(3) .training-icon {
+  animation-delay: 0.6s;
+}
+
+@keyframes iconWiggle {
+
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+/* === Contact === */
+.contact-section {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--pball-red) 0%, #ff4500 100%);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 3px solid var(--pball-black);
+  box-shadow: 0 4px 0 var(--pball-black), 0 6px 20px rgba(227, 53, 13, 0.4);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: 0;
+}
+
+.contact-btn:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.contact-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--pball-black), 0 4px 16px rgba(227, 53, 13, 0.6);
+  background: linear-gradient(135deg, var(--pball-red-dark) 0%, #e63900 100%);
+}
+
+.contact-btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+/* GitHub button */
+.contact-btn--github {
+  background: linear-gradient(135deg, #24292e 0%, #3a3f47 100%);
+  box-shadow: 0 4px 0 var(--pball-black), 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.contact-btn--github:hover {
+  background: linear-gradient(135deg, #1a1e22 0%, #2d3239 100%);
+  box-shadow: 0 2px 0 var(--pball-black), 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Resume button */
+.contact-btn--resume {
+  background: linear-gradient(135deg, var(--primary) 0%, #1a7db5 100%);
+  box-shadow: 0 4px 0 var(--pball-black), 0 6px 20px rgba(48, 167, 215, 0.4);
+}
+
+.contact-btn--resume:hover {
+  background: linear-gradient(135deg, #1a7db5 0%, #0f5e8a 100%);
+  box-shadow: 0 2px 0 var(--pball-black), 0 4px 16px rgba(48, 167, 215, 0.6);
+}
+
+/* Email button */
+.contact-btn--email {
+  background: linear-gradient(135deg, var(--pball-red) 0%, var(--pball-red-dark) 100%);
+  box-shadow: 0 4px 0 var(--pball-black), 0 6px 20px rgba(227, 53, 13, 0.4);
+}
+
+.contact-btn--email:hover {
+  background: linear-gradient(135deg, var(--pball-red-dark) 0%, #e63900 100%);
+  box-shadow: 0 2px 0 var(--pball-black), 0 4px 16px rgba(227, 53, 13, 0.6);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+/* === Resume Modal === */
+.modal-content--resume {
+  max-width: 860px;
+  width: 94%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-iframe-wrap {
+  flex: 1;
+  min-height: 0;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.resume-iframe {
+  width: 100%;
+  height: 70vh;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.resume-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  background: var(--pball-yellow);
+  color: var(--pball-black);
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid var(--pball-black);
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 3px 0 var(--pball-black);
+}
+
+.resume-download-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--pball-black);
+  background: #ffd700;
+}
+
+/* === Footer === */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  opacity: 0.8;
+}
+
+/* === Keyframes === */
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pballWobble {
+
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-12deg);
+  }
+
+  75% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes skillPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px var(--pball-yellow);
+  }
+}
+
+@keyframes hpPulse {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.5) drop-shadow(0 0 10px var(--hp-green));
+  }
+}
+
+@keyframes cardShake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px) rotate(-1deg);
+  }
+
+  75% {
+    transform: translateX(5px) rotate(1deg);
+  }
+}
+
+@keyframes buttonWiggle {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  25% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+
+  75% {
+    transform: translateY(-3px) rotate(2deg);
+  }
+}
+
+@keyframes rainbowBg {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+@keyframes crazyFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(180deg) scale(1.3);
+  }
+}
+
+/* === Cursor Effects === */
+.move-badge,
+.training-card,
+.hp-stat,
+.trainer-card-inner,
+.pokecard {
+  cursor: pointer;
+  user-select: none;
+}
+
+.move-badge:active {
+  transform: scale(0.95);
+}
+
+.training-card:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* === Tooltip === */
+.tooltip {
+  position: fixed;
+  background: var(--pball-black);
+  color: var(--pball-yellow);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1000;
+  border: 2px solid var(--pball-yellow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+/* === Certificates Modal === */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #1f2937 100%);
+  border: 4px solid var(--pball-yellow);
+  border-radius: 24px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 2px var(--pball-red);
+  animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px) scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 3px solid var(--pball-black);
+  background: linear-gradient(90deg, var(--bg-primary), var(--bg-secondary));
+}
+
+.modal-title {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: var(--pball-yellow);
+  margin: 0;
+  line-height: 1.8;
+}
+
+.modal-close {
+  background: var(--pball-red);
+  border: 3px solid var(--pball-black);
+  color: white;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-close:hover {
+  background: var(--pball-red-dark);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: calc(85vh - 100px);
+}
+
+/* === Certificate Stack in Modal === */
+.certificate-stack {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.certificate-cards-container {
+  position: relative;
+  height: 480px;
+  perspective: 1000px;
+}
+
+.certificate-cards-container .certificate-card {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg-card) 0%, #374151 100%);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(100%) scale(0.9) rotateY(20deg);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.certificate-cards-container .certificate-card.active {
+  opacity: 1;
+  transform: translateX(0) scale(1) rotateY(0deg);
+  pointer-events: auto;
+  z-index: 2;
+  border-color: var(--primary);
+}
+
+.certificate-cards-container .certificate-card.prev {
+  opacity: 0.3;
+  transform: translateX(-100%) scale(0.9) rotateY(-20deg);
+  z-index: 1;
+}
+
+.certificate-cards-container .certificate-card.next {
+  opacity: 0.3;
+  transform: translateX(100%) scale(0.9) rotateY(20deg);
+  z-index: 1;
+}
+
+.certificate-cards-container .certificate-card:hover {
+  border-color: var(--accent);
+}
+
+.certificate-cards-container .cert-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  animation: certFloat 3s ease-in-out infinite;
+}
+
+@keyframes certFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.certificate-cards-container .certificate-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.certificate-cards-container .certificate-card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.certificate-card {
+  background: linear-gradient(135deg, var(--bg-card) 0%, #374151 100%);
+  border: 3px solid var(--pball-black);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg,
+      transparent 30%,
+      rgba(255, 203, 5, 0.1) 50%,
+      transparent 70%);
+  transform: rotate(45deg);
+  transition: all 0.5s;
+}
+
+.certificate-card:hover::before {
+  left: 100%;
+}
+
+.certificate-card:hover {
+  border-color: var(--pball-yellow);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 203, 5, 0.3);
+}
+
+.cert-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  animation: certFloat 3s ease-in-out infinite;
+}
+
+.certificate-card:nth-child(1) .cert-icon {
+  animation-delay: 0s;
+}
+
+.certificate-card:nth-child(2) .cert-icon {
+  animation-delay: 0.2s;
+}
+
+.certificate-card:nth-child(3) .cert-icon {
+  animation-delay: 0.4s;
+}
+
+.certificate-card:nth-child(4) .cert-icon {
+  animation-delay: 0.6s;
+}
+
+.certificate-card:nth-child(5) .cert-icon {
+  animation-delay: 0.8s;
+}
+
+.certificate-card:nth-child(6) .cert-icon {
+  animation-delay: 1s;
+}
+
+@keyframes certFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.certificate-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--pball-yellow);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.certificate-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* === Responsive === */
+@media (max-width: 640px) {
+  .trainer-name {
+    font-size: 0.7rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .training-cards {
+    flex-direction: column;
+  }
+
+  .bg-pokemon {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .modal-title {
+    font-size: 0.5rem;
+  }
+
+  .certificate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Dot Indicators (Project / Certificate navigation) === */
+.dot-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.25);
+  box-shadow: 0 0 8px rgba(48, 167, 215, 0.6);
+}
+
+/* === Contact Availability Tagline === */
+.contact-tagline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.contact-tagline::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hp-green);
+  box-shadow: 0 0 6px var(--hp-green);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+/* === Certificate Images === */
+.cert-img-wrap {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s;
+}
+
+.certificate-card.active .cert-img-wrap {
+  box-shadow: 0 6px 24px rgba(48, 167, 215, 0.3);
+}
+
+.cert-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #1a1e2a;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.certificate-card:hover .cert-img {
+  transform: scale(1.03);
+}
+
+.certificate-cards-container .certificate-card h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.certificate-cards-container .certificate-card p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}

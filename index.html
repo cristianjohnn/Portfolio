@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cristian John Noroño | Pokémon Trainer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Flash overlay (wild encounter style) -->
+  <div class="flash-overlay" id="flashOverlay"></div>
+
+  <!-- Pokéball evolve button -->
+  <button class="pball-toggle" aria-label="Evolve Pokémon" id="evolveBtn">
+    <div class="pball">
+      <div class="pball-top"></div>
+      <div class="pball-bottom"></div>
+      <div class="pball-center"></div>
+    </div>
+  </button>
+
+  <!-- Music Toggle Button -->
+  <button class="music-toggle" aria-label="Toggle Music" id="musicToggle">
+    <span class="music-icon">🔇</span>
+  </button>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="littleroot.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Background Pokémon -->
+  <div class="pokemon-bg" aria-hidden="true">
+    <img data-id="25"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif"
+      alt="" class="bg-pokemon pika">
+    <img data-id="4"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif"
+      alt="" class="bg-pokemon char">
+    <img data-id="133"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/133.gif"
+      alt="" class="bg-pokemon eevee">
+    <img data-id="7"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/7.gif"
+      alt="" class="bg-pokemon squirtle">
+    <img data-id="1"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
+      alt="" class="bg-pokemon bulba">
+    <img data-id="39"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/39.gif"
+      alt="" class="bg-pokemon jiggly">
+    <img data-id="16"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/16.gif"
+      alt="" class="bg-pokemon pidgey">
+    <img data-id="35"
+      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/35.gif"
+      alt="" class="bg-pokemon clefairy">
+  </div>
+
+  <!-- Floating sparkles -->
+  <div class="sparkles" aria-hidden="true">
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">✦</span>
+    <span class="sparkle">★</span>
+    <span class="sparkle">★</span>
+  </div>
+
+  <!-- Interactive Tooltip -->
+  <div id="tooltip" class="tooltip"></div>
+
+  <!-- Certificates Modal -->
+  <div id="certificatesModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Certifications & Seminars</h2>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="certificate-stack">
+          <div class="certificate-cards-container">
+            <div class="certificate-card active" data-cert="1">
+              <div class="cert-img-wrap">
+                <img src="certone.png" alt="WAF – Are You Waiting For?" class="cert-img">
+              </div>
+              <h3>WAF – Are You Waiting For?</h3>
+              <p>Building a Resilient Cyberspace with Web Application Firewalls</p>
+            </div>
+            <div class="certificate-card" data-cert="2">
+              <div class="cert-img-wrap">
+                <img src="certTwo.png" alt="Beyond the Checklist" class="cert-img">
+              </div>
+              <h3>Beyond the Checklist</h3>
+              <p>Governance, Risk Management, and Compliance</p>
+            </div>
+            <div class="certificate-card" data-cert="3">
+              <div class="cert-img-wrap">
+                <img src="certthree.png" alt="Just Build the Damn Thing" class="cert-img">
+              </div>
+              <h3>Just Build the Damn Thing</h3>
+              <p>Practical Development Seminar</p>
+            </div>
+            <div class="certificate-card" data-cert="4">
+              <div class="cert-img-wrap">
+                <img src="certfour.png" alt="Generative AI to Assist Research" class="cert-img">
+              </div>
+              <h3>Generative AI to Assist Research</h3>
+              <p>Journaling in the Academe</p>
+            </div>
+            <div class="certificate-card" data-cert="5">
+              <div class="cert-img-wrap">
+                <img src="cert5.png" alt="Bringing Nature and Innovation" class="cert-img">
+              </div>
+              <h3>Bringing Nature and Innovation</h3>
+              <p>To Inspire and Transform</p>
+            </div>
+            <div class="certificate-card" data-cert="6">
+              <div class="cert-img-wrap">
+                <img src="certsix.png" alt="Fundamentals of Mechanical Engineering" class="cert-img">
+              </div>
+              <h3>Fundamentals of Mechanical Engineering</h3>
+              <p>Engineering Drawing</p>
+            </div>
+          </div>
+        </div>
+        <!-- Certificate dot indicators -->
+        <div class="dot-indicators" id="certDots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+          <span class="dot" data-index="4"></span>
+          <span class="dot" data-index="5"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Trainer Card -->
+    <header class="trainer-card">
+      <div class="trainer-card-inner">
+        <div class="avatar-wrapper">
+          <div class="pball-frame">
+            <img src="profile.jpg" alt="Cristian John Noroño" class="avatar-image">
+          </div>
+        </div>
+        <h1 class="trainer-name">Cristian John Noroño</h1>
+        <p class="trainer-title">BS Computer Engineering Student</p>
+        <p class="trainer-location">📍 STI College Cubao · Metro Manila, Philippines</p>
+        <p class="trainer-bio">Computer Engineering student & IT Support intern · Leveling up in hardware, software &
+          troubleshooting</p>
+        <div class="trainer-badge">💻 INTERN</div>
+      </div>
+    </header>
+
+    <!-- Stats (HP Bar Style) -->
+    <section class="stats-section">
+      <h2 class="section-title">EXPERIENCE</h2>
+      <div class="hp-bars">
+        <div class="hp-stat">
+          <div class="hp-label">
+            <span>IT Support</span>
+            <span class="hp-value">Experience</span>
+          </div>
+          <div class="hp-track" data-label="45%">
+            <div class="hp-fill" data-fill="45"></div>
+          </div>
+        </div>
+        <div class="hp-stat">
+          <div class="hp-label">
+            <span>IoT</span>
+            <span class="hp-value">Specialization</span>
+          </div>
+          <div class="hp-track" data-label="48%">
+            <div class="hp-fill" data-fill="48"></div>
+          </div>
+        </div>
+        <div class="hp-stat">
+          <div class="hp-label">
+            <span>Assistive Tech</span>
+            <span class="hp-value">Focus</span>
+          </div>
+          <div class="hp-track" data-label="50%">
+            <div class="hp-fill" data-fill="50"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="section">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="project-stack">
+        <div class="project-cards-container">
+          <!-- Project 1: GESTURA -->
+          <article class="project-card active" data-project="1">
+            <div class="project-glow"></div>
+            <div class="project-inner">
+              <div class="project-header">
+                <span class="project-type">Assistive Technology</span>
+                <span class="project-status">Active Development</span>
+              </div>
+              <h3 class="project-name">GESTURA</h3>
+              <p class="project-desc">Wearable Device for Translating and Learning Filipino Sign Language</p>
+              <ul class="project-features">
+                <li><span class="feature-type">Code</span> Microcontroller system</li>
+                <li><span class="feature-type">Hardware</span> Sensor integration</li>
+                <li><span class="feature-type">Embedded</span> Hardware-software</li>
+                <li><span class="feature-type">Support</span> Assistive technology</li>
+              </ul>
+              <div class="project-footer">
+                <span class="project-tech">Embedded C</span>
+                <span class="project-tech">Arduino</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: RC Car -->
+          <article class="project-card" data-project="2">
+            <div class="project-glow"></div>
+            <div class="project-inner">
+              <div class="project-header">
+                <span class="project-type">IoT & Robotics</span>
+                <span class="project-status">Completed</span>
+              </div>
+              <h3 class="project-name">Remote Control Car</h3>
+              <p class="project-desc">Arduino-based RC car with ESP32 wireless remote control system</p>
+              <ul class="project-features">
+                <li><span class="feature-type">Hardware</span> Arduino motor control</li>
+                <li><span class="feature-type">Wireless</span> ESP32 communication</li>
+                <li><span class="feature-type">IoT</span> Remote control system</li>
+                <li><span class="feature-type">Embedded</span> Real-time control</li>
+              </ul>
+              <div class="project-footer">
+                <span class="project-tech">Arduino</span>
+                <span class="project-tech">ESP32</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- Project dot indicators -->
+        <div class="dot-indicators" id="projectDots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Moveset (Skills) -->
+    <section class="section">
+      <h2 class="section-title">SKILLS</h2>
+      <div class="moves-grid">
+        <div class="move-category">
+          <h4>Programming</h4>
+          <div class="move-badges">
+            <span class="move-badge">Java</span>
+            <span class="move-badge">Python</span>
+          </div>
+        </div>
+        <div class="move-category">
+          <h4>Embedded & IoT</h4>
+          <div class="move-badges">
+            <span class="move-badge">Arduino</span>
+            <span class="move-badge">ESP32</span>
+            <span class="move-badge">Sensors</span>
+            <span class="move-badge">Circuit Prototyping</span>
+          </div>
+        </div>
+        <div class="move-category">
+          <h4>IT Support & Concepts</h4>
+          <div class="move-badges">
+            <span class="move-badge">IT Support</span>
+            <span class="move-badge">Troubleshooting</span>
+            <span class="move-badge">Machine Learning</span>
+            <span class="move-badge">Electronics</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Training (Currently Learning) -->
+    <section class="section">
+      <h2 class="section-title">IN TRAINING</h2>
+      <div class="training-cards">
+        <div class="training-card">
+          <span class="training-icon">🧠</span>
+          <span>Machine Learning Applications</span>
+        </div>
+        <div class="training-card">
+          <span class="training-icon">🐍</span>
+          <span>Advanced Python</span>
+        </div>
+        <div class="training-card">
+          <span class="training-icon">🔀</span>
+          <span>Git & Collaborative Development</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section">
+      <h2 class="section-title">CONTACTS</h2>
+      <div class="contact-links">
+        <a href="mailto:cristianjohnnorono@gmail.com" class="contact-btn contact-btn--email">
+          <span class="btn-icon">✉️</span>
+          cristianjohnnorono@gmail.com
+        </a>
+        <a href="https://github.com/cristianjohnn" class="contact-btn contact-btn--github" target="_blank"
+          rel="noopener">
+          <span class="btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
+            </svg>
+          </span>
+          github.com/cristianjohnn
+        </a>
+        <a href="Cristian_John_Noroño_Resume.pdf" class="contact-btn contact-btn--resume" download>
+          <span class="btn-icon">📄</span>
+          View &amp; Download Resume
+        </a>
+      </div>
+      <p class="contact-tagline">Open to internships &amp; opportunities</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Gotta code 'em all! · Intern life · Cristian John Noroño</p>
+  </footer>
+
+  <!-- Resume Modal -->
+  <div id="resumeModal" class="modal">
+    <div class="modal-content modal-content--resume">
+      <div class="modal-header">
+        <h2 class="modal-title">📄 Resume</h2>
+        <div style="display:flex;gap:0.75rem;align-items:center;">
+          <a href="Cristian_John_Noroño_Resume.pdf" download class="resume-download-btn">⬇ Download</a>
+          <button class="modal-close" id="closeResumeModal">&times;</button>
+        </div>
+      </div>
+      <div class="resume-iframe-wrap">
+        <iframe src="Cristian_John_Noroño_Resume.pdf" class="resume-iframe"
+          title="Cristian John Noroño Resume"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
