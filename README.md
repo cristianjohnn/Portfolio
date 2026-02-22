@@ -1,11 +1,33 @@
 # Portfolio - Cristian John Noroño
 
-A GitHub-style interactive portfolio showcasing your background in Computer Engineering, embedded systems, and the GESTURA project.
+An interactive portfolio showcasing my background in Computer Engineering, embedded systems, and featured projects including GESTURA and Arduino-based remote control car.
 
-## Quick Start
+## 🌐 Live Demo
 
-1. Open `index.html` in your browser, or
-2. Use a simple local server:
+Visit my portfolio at: **[cristianjohnn.github.io/Portfolio](https://cristianjohnn.github.io/Portfolio)**
+
+## 🚀 Deployment
+
+This portfolio is automatically deployed via GitHub Pages. Any push to the `gh-pages` branch will update the live site.
+
+### Deploy Your Own
+
+1. Fork this repository
+2. Go to Settings → Pages
+3. Select `gh-pages` branch as source
+4. Your site will be live at `https://yourusername.github.io/Portfolio`
+
+## 💻 Local Development
+
+To run locally:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/cristianjohnn/Portfolio.git
+   cd Portfolio
+   ```
+
+2. Open `index.html` in your browser, or use a local server:
    ```bash
    # Python
    python -m http.server 8000
@@ -13,17 +35,29 @@ A GitHub-style interactive portfolio showcasing your background in Computer Engi
    # Node (if you have npx)
    npx serve .
    ```
+
 3. Visit `http://localhost:8000`
 
-## Features
+## ✨ Features
 
-- **GitHub-inspired design** — Dark/light themes, repo-style cards, stats bar
-- **Responsive** — Works on desktop and mobile
-- **Theme toggle** — Persists preference in localStorage
-- **Sections** — Profile, Featured Project (GESTURA), Skills, Currently Learning, Contact
+- **Interactive Design** — Professional tech-themed portfolio with smooth animations
+- **Swipeable Project Cards** — Navigate through multiple projects with click navigation
+- **Certificate Modal** — View certificates by clicking the profile card
+- **Background Music** — Toggle Pokémon-themed background music
+- **Responsive** — Works seamlessly on desktop and mobile
+- **Contact Integration** — Email copy-to-clipboard, GitHub link, and downloadable resume
 
-## Customization
+## 🛠️ Tech Stack
 
-- **Avatar**: Replace the `.avatar-placeholder` div with an `<img>` if you have a profile photo
-- **Content**: Edit `index.html` to update any text, skills, or projects
-- **Colors**: Modify CSS variables in `:root` and `[data-theme="light"]` in `styles.css`
+- Pure HTML5, CSS3, and JavaScript
+- No frameworks or dependencies
+- Optimized for performance and accessibility
+
+## 📧 Contact
+
+- **Email**: cristianjohnnorono@gmail.com
+- **GitHub**: [@cristianjohnn](https://github.com/cristianjohnn)
+
+---
+
+Made with ❤️ by Cristian John Noroño
