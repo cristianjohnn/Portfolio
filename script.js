@@ -34,6 +34,52 @@ if (musicToggle && bgMusic) {
   bgMusic.volume = 0.3;
 }
 
+// === Pokémon Randomizer ===
+const pokemonRandomizer = document.getElementById('pokemonRandomizer');
+const allPossiblePokemon = [
+  1, 4, 7, 10, 13, 16, 19, 21, 23, 25, 27, 29, 32, 35, 37, 39, 41, 43, 46, 48,
+  50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 74, 77, 79, 81, 83, 84, 86, 88, 90,
+  92, 95, 96, 98, 100, 102, 104, 108, 109, 111, 113, 114, 115, 116, 118, 120,
+  122, 123, 124, 125, 126, 127, 128, 129, 131, 132, 133, 137, 138, 140, 142,
+  143, 147, 150, 151
+];
+
+if (pokemonRandomizer) {
+  pokemonRandomizer.addEventListener('click', function() {
+    this.classList.add('randomizing');
+    
+    const bgPokemonElements = document.querySelectorAll('.bg-pokemon[data-id]');
+    
+    // Reset evolution stage
+    evoStage = 0;
+    
+    // Randomize each Pokémon
+    bgPokemonElements.forEach(pokemonImg => {
+      // Pick a random Pokémon ID
+      const randomId = allPossiblePokemon[Math.floor(Math.random() * allPossiblePokemon.length)];
+      
+      // Add animation
+      pokemonImg.classList.add('evolving');
+      
+      // Update after animation
+      setTimeout(() => {
+        pokemonImg.setAttribute('data-id', randomId);
+        pokemonImg.src = `${SPRITE_BASE}/${randomId}.gif`;
+        pokemonImg.classList.remove('evolving', 'caught');
+        pokemonImg.style.filter = '';
+        pokemonImg.style.animation = '';
+      }, 300);
+    });
+    
+    showPopup('🎲 Pokémon Randomized!');
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      this.classList.remove('randomizing');
+    }, 500);
+  });
+}
+
 // === Evolution Chains ===
 const SPRITE_BASE = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated';
 
@@ -690,7 +736,8 @@ const tooltipElements = {
   '.pokecard': 'Double-click to flip card!',
   '.pball-toggle': 'Click to evolve Pokémon!',
   '.bg-pokemon': 'Click to catch!',
-  '.music-toggle': 'Toggle background music'
+  '.music-toggle': 'Toggle background music',
+  '.pokemon-randomizer': 'Randomize Pokémon!'
 };
 
 Object.entries(tooltipElements).forEach(([selector, text]) => {
