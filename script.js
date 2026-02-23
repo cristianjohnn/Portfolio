@@ -34,6 +34,27 @@ if (musicToggle && bgMusic) {
   bgMusic.volume = 0.3;
 }
 
+// === Ball Selection System ===
+let selectedBall = 'ultraball';
+let ballMultiplier = 2;
+
+const ballOptions = document.querySelectorAll('.ball-option');
+ballOptions.forEach(option => {
+  option.addEventListener('click', function() {
+    ballOptions.forEach(opt => opt.classList.remove('active'));
+    this.classList.add('active');
+    selectedBall = this.dataset.ball;
+    ballMultiplier = parseFloat(this.dataset.multiplier);
+    
+    const ballNames = {
+      'pokeball': 'Poké Ball',
+      'greatball': 'Great Ball',
+      'ultraball': 'Ultra Ball'
+    };
+    showPopup(`${ballNames[selectedBall]} selected!`);
+  });
+});
+
 // === Pokémon Randomizer ===
 const pokemonRandomizer = document.getElementById('pokemonRandomizer');
 const allPossiblePokemon = [
@@ -696,6 +717,24 @@ function getRarityName(pokemonId) {
   return 'Common';
 }
 
+// Calculate number of wiggles based on catch probability
+function calculateWiggles(baseCatchRate, ballMultiplier) {
+  const modifiedRate = Math.min(baseCatchRate * ballMultiplier, 1);
+  const rand = Math.random();
+  
+  // 0 wiggles: Instant breakout (very low chance)
+  if (rand > modifiedRate * 4) return 0;
+  
+  // 1 wiggle: Low chance
+  if (rand > modifiedRate * 2.5) return 1;
+  
+  // 2 wiggles: Medium chance
+  if (rand > modifiedRate * 1.5) return 2;
+  
+  // 3 wiggles: Success!
+  return 3;
+}
+
 function createThrownPball() {
   const ball = document.createElement('div');
   ball.className = 'thrown-pball';
@@ -744,27 +783,28 @@ function catchPokemon(img) {
   });
 
   setTimeout(() => {
-    img.classList.add('catching', 'caught'); // Add caught immediately to make it disappear
+    img.classList.add('catching', 'caught'); // Pokémon disappears into ball
     ball.classList.remove('throwing');
 
     // Get Pokémon ID and catch rate
     const src = img.src;
     const idMatch = src.match(/\/(\d+)\./);
     const pokemonId = idMatch ? parseInt(idMatch[1]) : 1;
-    const catchRate = getCatchRate(pokemonId);
+    const baseCatchRate = getCatchRate(pokemonId);
     const rarity = getRarityName(pokemonId);
     const name = pokemonNames[pokemonId] || 'Pokémon';
 
-    let wobbles = 0;
-    const maxWobbles = 3;
+    // Calculate wiggles based on catch rate and ball multiplier
+    const wiggles = calculateWiggles(baseCatchRate, ballMultiplier);
+    let currentWiggle = 0;
 
-    function doWobble() {
-      if (wobbles >= maxWobbles) {
-        // Check if catch is successful based on catch rate
-        const catchSuccess = Math.random() < catchRate;
+    function doWiggle() {
+      if (currentWiggle >= wiggles) {
+        // Determine if caught based on wiggles
+        const catchSuccess = wiggles === 3;
         
         if (catchSuccess) {
-          // Successful catch
+          // Successful catch - 3 wiggles
           ball.classList.add('catch-success');
           spawnSparkles(targetX + 14, targetY + 14);
           showPopup(`Gotcha! ${name} was caught! (${rarity})`);
@@ -785,10 +825,16 @@ function catchPokemon(img) {
             }, 1500);
           }, 400);
         } else {
-          // Failed catch - Pokémon breaks free
+          // Failed catch - 0, 1, or 2 wiggles
           ball.classList.add('catch-fail');
-          img.classList.remove('caught'); // Make Pokémon reappear
-          showPopup(`${name} broke free! (${rarity})`);
+          img.classList.remove('caught'); // Pokémon breaks free
+          
+          const wiggleMessages = {
+            0: `${name} broke free instantly! (${rarity})`,
+            1: `${name} broke free after 1 wiggle! (${rarity})`,
+            2: `${name} almost got caught! (${rarity})`
+          };
+          showPopup(wiggleMessages[wiggles]);
           
           setTimeout(() => {
             ball.remove();
@@ -799,14 +845,20 @@ function catchPokemon(img) {
         return;
       }
 
-      wobbles++;
+      currentWiggle++;
       ball.classList.remove('wobble');
       void ball.offsetWidth;
       ball.classList.add('wobble');
-      setTimeout(doWobble, 500);
+      setTimeout(doWiggle, 500);
     }
 
-    setTimeout(doWobble, 200);
+    // Start wiggling after a short delay
+    if (wiggles === 0) {
+      // Instant breakout - no wiggles
+      setTimeout(() => doWiggle(), 200);
+    } else {
+      setTimeout(doWiggle, 200);
+    }
   }, 550);
 }
 
@@ -1313,7 +1365,8 @@ const tooltipElements = {
   '.pball-toggle': 'Click to evolve Pokémon!',
   '.bg-pokemon': 'Click to catch!',
   '.music-toggle': 'Toggle background music',
-  '.pokemon-randomizer': 'Randomize Pokémon!'
+  '.pokemon-randomizer': 'Randomize Pokémon!',
+  '.ball-option': 'Select your Poké Ball!'
 };
 
 Object.entries(tooltipElements).forEach(([selector, text]) => {
