@@ -35,8 +35,8 @@ if (musicToggle && bgMusic) {
 }
 
 // === Ball Selection System ===
-let selectedBall = 'ultraball';
-let ballMultiplier = 2;
+let selectedBall = null;
+let ballMultiplier = 0;
 
 const ballOptions = document.querySelectorAll('.ball-option-vertical');
 ballOptions.forEach(option => {
