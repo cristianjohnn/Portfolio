@@ -84,14 +84,152 @@ if (pokemonRandomizer) {
 const SPRITE_BASE = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated';
 
 const evolutionChains = {
-  25: [25, 26],           // Pikachu → Raichu
-  4: [4, 5, 6],          // Charmander → Charmeleon → Charizard
-  133: [133, 134, 135, 136], // Eevee → Vaporeon → Jolteon → Flareon
-  7: [7, 8, 9],          // Squirtle → Wartortle → Blastoise
   1: [1, 2, 3],          // Bulbasaur → Ivysaur → Venusaur
-  39: [39, 40],           // Jigglypuff → Wigglytuff
-  16: [16, 17, 18],       // Pidgey → Pidgeotto → Pidgeot
-  35: [35, 36],           // Clefairy → Clefable
+  2: [1, 2, 3],
+  3: [1, 2, 3],
+  4: [4, 5, 6],          // Charmander → Charmeleon → Charizard
+  5: [4, 5, 6],
+  6: [4, 5, 6],
+  7: [7, 8, 9],          // Squirtle → Wartortle → Blastoise
+  8: [7, 8, 9],
+  9: [7, 8, 9],
+  10: [10, 11, 12],      // Caterpie → Metapod → Butterfree
+  11: [10, 11, 12],
+  12: [10, 11, 12],
+  13: [13, 14, 15],      // Weedle → Kakuna → Beedrill
+  14: [13, 14, 15],
+  15: [13, 14, 15],
+  16: [16, 17, 18],      // Pidgey → Pidgeotto → Pidgeot
+  17: [16, 17, 18],
+  18: [16, 17, 18],
+  19: [19, 20],          // Rattata → Raticate
+  20: [19, 20],
+  21: [21, 22],          // Spearow → Fearow
+  22: [21, 22],
+  23: [23, 24],          // Ekans → Arbok
+  24: [23, 24],
+  25: [25, 26],          // Pikachu → Raichu
+  26: [25, 26],
+  27: [27, 28],          // Sandshrew → Sandslash
+  28: [27, 28],
+  29: [29, 30, 31],      // Nidoran♀ → Nidorina → Nidoqueen
+  30: [29, 30, 31],
+  31: [29, 30, 31],
+  32: [32, 33, 34],      // Nidoran♂ → Nidorino → Nidoking
+  33: [32, 33, 34],
+  34: [32, 33, 34],
+  35: [35, 36],          // Clefairy → Clefable
+  36: [35, 36],
+  37: [37, 38],          // Vulpix → Ninetales
+  38: [37, 38],
+  39: [39, 40],          // Jigglypuff → Wigglytuff
+  40: [39, 40],
+  41: [41, 42],          // Zubat → Golbat
+  42: [41, 42],
+  43: [43, 44, 45],      // Oddish → Gloom → Vileplume
+  44: [43, 44, 45],
+  45: [43, 44, 45],
+  46: [46, 47],          // Paras → Parasect
+  47: [46, 47],
+  48: [48, 49],          // Venonat → Venomoth
+  49: [48, 49],
+  50: [50, 51],          // Diglett → Dugtrio
+  51: [50, 51],
+  52: [52, 53],          // Meowth → Persian
+  53: [52, 53],
+  54: [54, 55],          // Psyduck → Golduck
+  55: [54, 55],
+  56: [56, 57],          // Mankey → Primeape
+  57: [56, 57],
+  58: [58, 59],          // Growlithe → Arcanine
+  59: [58, 59],
+  60: [60, 61, 62],      // Poliwag → Poliwhirl → Poliwrath
+  61: [60, 61, 62],
+  62: [60, 61, 62],
+  63: [63, 64, 65],      // Abra → Kadabra → Alakazam
+  64: [63, 64, 65],
+  65: [63, 64, 65],
+  66: [66, 67, 68],      // Machop → Machoke → Machamp
+  67: [66, 67, 68],
+  68: [66, 67, 68],
+  69: [69, 70, 71],      // Bellsprout → Weepinbell → Victreebel
+  70: [69, 70, 71],
+  71: [69, 70, 71],
+  72: [72, 73],          // Tentacool → Tentacruel
+  73: [72, 73],
+  74: [74, 75, 76],      // Geodude → Graveler → Golem
+  75: [74, 75, 76],
+  76: [74, 75, 76],
+  77: [77, 78],          // Ponyta → Rapidash
+  78: [77, 78],
+  79: [79, 80],          // Slowpoke → Slowbro
+  80: [79, 80],
+  81: [81, 82],          // Magnemite → Magneton
+  82: [81, 82],
+  83: [83],              // Farfetch'd (no evolution)
+  84: [84, 85],          // Doduo → Dodrio
+  85: [84, 85],
+  86: [86, 87],          // Seel → Dewgong
+  87: [86, 87],
+  88: [88, 89],          // Grimer → Muk
+  89: [88, 89],
+  90: [90, 91],          // Shellder → Cloyster
+  91: [90, 91],
+  92: [92, 93, 94],      // Gastly → Haunter → Gengar
+  93: [92, 93, 94],
+  94: [92, 93, 94],
+  95: [95],              // Onix (no evolution in Gen 1)
+  96: [96, 97],          // Drowzee → Hypno
+  97: [96, 97],
+  98: [98, 99],          // Krabby → Kingler
+  99: [98, 99],
+  100: [100, 101],       // Voltorb → Electrode
+  101: [100, 101],
+  102: [102, 103],       // Exeggcute → Exeggutor
+  103: [102, 103],
+  104: [104, 105],       // Cubone → Marowak
+  105: [104, 105],
+  108: [108],            // Lickitung (no evolution in Gen 1)
+  109: [109, 110],       // Koffing → Weezing
+  110: [109, 110],
+  111: [111, 112],       // Rhyhorn → Rhydon
+  112: [111, 112],
+  113: [113],            // Chansey (no evolution in Gen 1)
+  114: [114],            // Tangela (no evolution in Gen 1)
+  115: [115],            // Kangaskhan (no evolution)
+  116: [116, 117],       // Horsea → Seadra
+  117: [116, 117],
+  118: [118, 119],       // Goldeen → Seaking
+  119: [118, 119],
+  120: [120, 121],       // Staryu → Starmie
+  121: [120, 121],
+  122: [122],            // Mr. Mime (no evolution)
+  123: [123],            // Scyther (no evolution in Gen 1)
+  124: [124],            // Jynx (no evolution in Gen 1)
+  125: [125],            // Electabuzz (no evolution in Gen 1)
+  126: [126],            // Magmar (no evolution in Gen 1)
+  127: [127],            // Pinsir (no evolution)
+  128: [128],            // Tauros (no evolution)
+  129: [129, 130],       // Magikarp → Gyarados
+  130: [129, 130],
+  131: [131],            // Lapras (no evolution)
+  132: [132],            // Ditto (no evolution)
+  133: [133, 134, 135, 136], // Eevee → Vaporeon/Jolteon/Flareon
+  134: [133, 134, 135, 136],
+  135: [133, 134, 135, 136],
+  136: [133, 134, 135, 136],
+  137: [137],            // Porygon (no evolution in Gen 1)
+  138: [138, 139],       // Omanyte → Omastar
+  139: [138, 139],
+  140: [140, 141],       // Kabuto → Kabutops
+  141: [140, 141],
+  142: [142],            // Aerodactyl (no evolution)
+  143: [143],            // Snorlax (no evolution in Gen 1)
+  147: [147, 148, 149],  // Dratini → Dragonair → Dragonite
+  148: [147, 148, 149],
+  149: [147, 148, 149],
+  150: [150],            // Mewtwo (no evolution)
+  151: [151],            // Mew (no evolution)
 };
 
 let evoStage = 0;
@@ -133,9 +271,30 @@ evolveBtn?.addEventListener('click', evolvePokemon);
 // === Pokémon Catch Mechanic ===
 const pokemonNames = {
   1: 'Bulbasaur', 2: 'Ivysaur', 3: 'Venusaur', 4: 'Charmander', 5: 'Charmeleon', 6: 'Charizard',
-  7: 'Squirtle', 8: 'Wartortle', 9: 'Blastoise', 16: 'Pidgey', 17: 'Pidgeotto', 18: 'Pidgeot',
-  25: 'Pikachu', 26: 'Raichu', 35: 'Clefairy', 36: 'Clefable', 39: 'Jigglypuff', 40: 'Wigglytuff',
-  133: 'Eevee', 134: 'Vaporeon', 135: 'Jolteon', 136: 'Flareon'
+  7: 'Squirtle', 8: 'Wartortle', 9: 'Blastoise', 10: 'Caterpie', 11: 'Metapod', 12: 'Butterfree',
+  13: 'Weedle', 14: 'Kakuna', 15: 'Beedrill', 16: 'Pidgey', 17: 'Pidgeotto', 18: 'Pidgeot',
+  19: 'Rattata', 20: 'Raticate', 21: 'Spearow', 22: 'Fearow', 23: 'Ekans', 24: 'Arbok',
+  25: 'Pikachu', 26: 'Raichu', 27: 'Sandshrew', 28: 'Sandslash', 29: 'Nidoran♀', 30: 'Nidorina',
+  31: 'Nidoqueen', 32: 'Nidoran♂', 33: 'Nidorino', 34: 'Nidoking', 35: 'Clefairy', 36: 'Clefable',
+  37: 'Vulpix', 38: 'Ninetales', 39: 'Jigglypuff', 40: 'Wigglytuff', 41: 'Zubat', 42: 'Golbat',
+  43: 'Oddish', 44: 'Gloom', 45: 'Vileplume', 46: 'Paras', 47: 'Parasect', 48: 'Venonat',
+  49: 'Venomoth', 50: 'Diglett', 51: 'Dugtrio', 52: 'Meowth', 53: 'Persian', 54: 'Psyduck',
+  55: 'Golduck', 56: 'Mankey', 57: 'Primeape', 58: 'Growlithe', 59: 'Arcanine', 60: 'Poliwag',
+  61: 'Poliwhirl', 62: 'Poliwrath', 63: 'Abra', 64: 'Kadabra', 65: 'Alakazam', 66: 'Machop',
+  67: 'Machoke', 68: 'Machamp', 69: 'Bellsprout', 70: 'Weepinbell', 71: 'Victreebel', 72: 'Tentacool',
+  73: 'Tentacruel', 74: 'Geodude', 75: 'Graveler', 76: 'Golem', 77: 'Ponyta', 78: 'Rapidash',
+  79: 'Slowpoke', 80: 'Slowbro', 81: 'Magnemite', 82: 'Magneton', 83: 'Farfetch\'d', 84: 'Doduo',
+  85: 'Dodrio', 86: 'Seel', 87: 'Dewgong', 88: 'Grimer', 89: 'Muk', 90: 'Shellder',
+  91: 'Cloyster', 92: 'Gastly', 93: 'Haunter', 94: 'Gengar', 95: 'Onix', 96: 'Drowzee',
+  97: 'Hypno', 98: 'Krabby', 99: 'Kingler', 100: 'Voltorb', 101: 'Electrode', 102: 'Exeggcute',
+  103: 'Exeggutor', 104: 'Cubone', 105: 'Marowak', 108: 'Lickitung', 109: 'Koffing', 110: 'Weezing',
+  111: 'Rhyhorn', 112: 'Rhydon', 113: 'Chansey', 114: 'Tangela', 115: 'Kangaskhan', 116: 'Horsea',
+  117: 'Seadra', 118: 'Goldeen', 119: 'Seaking', 120: 'Staryu', 121: 'Starmie', 122: 'Mr. Mime',
+  123: 'Scyther', 124: 'Jynx', 125: 'Electabuzz', 126: 'Magmar', 127: 'Pinsir', 128: 'Tauros',
+  129: 'Magikarp', 130: 'Gyarados', 131: 'Lapras', 132: 'Ditto', 133: 'Eevee', 134: 'Vaporeon',
+  135: 'Jolteon', 136: 'Flareon', 137: 'Porygon', 138: 'Omanyte', 139: 'Omastar', 140: 'Kabuto',
+  141: 'Kabutops', 142: 'Aerodactyl', 143: 'Snorlax', 147: 'Dratini', 148: 'Dragonair', 149: 'Dragonite',
+  150: 'Mewtwo', 151: 'Mew'
 };
 
 function createThrownPball() {
