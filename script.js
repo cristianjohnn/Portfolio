@@ -970,7 +970,7 @@ function catchPokemon(img) {
           
           setTimeout(() => {
             ball.remove();
-            img.classList.remove('catching');
+            img.classList.remove('catching', 'poke-hover');
             delete img.dataset.catching;
           }, 800);
         }
