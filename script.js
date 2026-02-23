@@ -37,11 +37,28 @@ if (musicToggle && bgMusic) {
 // === Pokémon Randomizer ===
 const pokemonRandomizer = document.getElementById('pokemonRandomizer');
 const allPossiblePokemon = [
+  // Gen 1 (1-151)
   1, 4, 7, 10, 13, 16, 19, 21, 23, 25, 27, 29, 32, 35, 37, 39, 41, 43, 46, 48,
   50, 52, 54, 56, 58, 60, 63, 66, 69, 72, 74, 77, 79, 81, 83, 84, 86, 88, 90,
   92, 95, 96, 98, 100, 102, 104, 108, 109, 111, 113, 114, 115, 116, 118, 120,
   122, 123, 124, 125, 126, 127, 128, 129, 131, 132, 133, 137, 138, 140, 142,
-  143, 147, 150, 151
+  143, 147, 150, 151,
+  // Gen 2 (152-251) - Selected popular ones
+  152, 155, 158, 172, 175, 179, 183, 185, 187, 190, 193, 194, 198, 200, 201,
+  203, 206, 209, 213, 215, 216, 218, 220, 223, 225, 227, 228, 231, 234, 236,
+  238, 239, 240, 241, 243, 244, 245, 246, 249, 250, 251,
+  // Gen 3 (252-386) - Selected popular ones
+  252, 255, 258, 261, 263, 265, 270, 273, 276, 278, 280, 283, 285, 287, 290,
+  293, 296, 298, 300, 302, 304, 307, 309, 311, 312, 313, 314, 315, 316, 318,
+  320, 322, 325, 327, 328, 331, 333, 335, 336, 337, 338, 339, 341, 343, 345,
+  347, 349, 350, 351, 352, 353, 355, 357, 359, 360, 361, 363, 366, 369, 370,
+  371, 374, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386,
+  // Gen 4 (387-493) - Selected popular ones
+  387, 390, 393, 396, 399, 401, 403, 406, 408, 410, 412, 415, 417, 418, 420,
+  422, 425, 427, 429, 430, 431, 433, 434, 436, 438, 439, 440, 441, 442, 443,
+  446, 447, 449, 451, 453, 455, 456, 458, 459, 461, 462, 463, 464, 465, 466,
+  467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481,
+  482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493
 ];
 
 if (pokemonRandomizer) {
@@ -294,8 +311,94 @@ const pokemonNames = {
   129: 'Magikarp', 130: 'Gyarados', 131: 'Lapras', 132: 'Ditto', 133: 'Eevee', 134: 'Vaporeon',
   135: 'Jolteon', 136: 'Flareon', 137: 'Porygon', 138: 'Omanyte', 139: 'Omastar', 140: 'Kabuto',
   141: 'Kabutops', 142: 'Aerodactyl', 143: 'Snorlax', 147: 'Dratini', 148: 'Dragonair', 149: 'Dragonite',
-  150: 'Mewtwo', 151: 'Mew'
+  150: 'Mewtwo', 151: 'Mew',
+  // Gen 2
+  152: 'Chikorita', 153: 'Bayleef', 154: 'Meganium', 155: 'Cyndaquil', 156: 'Quilava', 157: 'Typhlosion',
+  158: 'Totodile', 159: 'Croconaw', 160: 'Feraligatr', 161: 'Sentret', 162: 'Furret', 163: 'Hoothoot',
+  164: 'Noctowl', 165: 'Ledyba', 166: 'Ledian', 167: 'Spinarak', 168: 'Ariados', 169: 'Crobat',
+  170: 'Chinchou', 171: 'Lanturn', 172: 'Pichu', 173: 'Cleffa', 174: 'Igglybuff', 175: 'Togepi',
+  176: 'Togetic', 177: 'Natu', 178: 'Xatu', 179: 'Mareep', 180: 'Flaaffy', 181: 'Ampharos',
+  182: 'Bellossom', 183: 'Marill', 184: 'Azumarill', 185: 'Sudowoodo', 186: 'Politoed', 187: 'Hoppip',
+  188: 'Skiploom', 189: 'Jumpluff', 190: 'Aipom', 191: 'Sunkern', 192: 'Sunflora', 193: 'Yanma',
+  194: 'Wooper', 195: 'Quagsire', 196: 'Espeon', 197: 'Umbreon', 198: 'Murkrow', 199: 'Slowking',
+  200: 'Misdreavus', 201: 'Unown', 202: 'Wobbuffet', 203: 'Girafarig', 204: 'Pineco', 205: 'Forretress',
+  206: 'Dunsparce', 207: 'Gligar', 208: 'Steelix', 209: 'Snubbull', 210: 'Granbull', 211: 'Qwilfish',
+  212: 'Scizor', 213: 'Shuckle', 214: 'Heracross', 215: 'Sneasel', 216: 'Teddiursa', 217: 'Ursaring',
+  218: 'Slugma', 219: 'Magcargo', 220: 'Swinub', 221: 'Piloswine', 222: 'Corsola', 223: 'Remoraid',
+  224: 'Octillery', 225: 'Delibird', 226: 'Mantine', 227: 'Skarmory', 228: 'Houndour', 229: 'Houndoom',
+  230: 'Kingdra', 231: 'Phanpy', 232: 'Donphan', 233: 'Porygon2', 234: 'Stantler', 235: 'Smeargle',
+  236: 'Tyrogue', 237: 'Hitmontop', 238: 'Smoochum', 239: 'Elekid', 240: 'Magby', 241: 'Miltank',
+  242: 'Blissey', 243: 'Raikou', 244: 'Entei', 245: 'Suicune', 246: 'Larvitar', 247: 'Pupitar',
+  248: 'Tyranitar', 249: 'Lugia', 250: 'Ho-Oh', 251: 'Celebi',
+  // Gen 3
+  252: 'Treecko', 253: 'Grovyle', 254: 'Sceptile', 255: 'Torchic', 256: 'Combusken', 257: 'Blaziken',
+  258: 'Mudkip', 259: 'Marshtomp', 260: 'Swampert', 261: 'Poochyena', 262: 'Mightyena', 263: 'Zigzagoon',
+  264: 'Linoone', 265: 'Wurmple', 266: 'Silcoon', 267: 'Beautifly', 268: 'Cascoon', 269: 'Dustox',
+  270: 'Lotad', 271: 'Lombre', 272: 'Ludicolo', 273: 'Seedot', 274: 'Nuzleaf', 275: 'Shiftry',
+  276: 'Taillow', 277: 'Swellow', 278: 'Wingull', 279: 'Pelipper', 280: 'Ralts', 281: 'Kirlia',
+  282: 'Gardevoir', 283: 'Surskit', 284: 'Masquerain', 285: 'Shroomish', 286: 'Breloom', 287: 'Slakoth',
+  288: 'Vigoroth', 289: 'Slaking', 290: 'Nincada', 291: 'Ninjask', 292: 'Shedinja', 293: 'Whismur',
+  294: 'Loudred', 295: 'Exploud', 296: 'Makuhita', 297: 'Hariyama', 298: 'Azurill', 299: 'Nosepass',
+  300: 'Skitty', 301: 'Delcatty', 302: 'Sableye', 303: 'Mawile', 304: 'Aron', 305: 'Lairon',
+  306: 'Aggron', 307: 'Meditite', 308: 'Medicham', 309: 'Electrike', 310: 'Manectric', 311: 'Plusle',
+  312: 'Minun', 313: 'Volbeat', 314: 'Illumise', 315: 'Roselia', 316: 'Gulpin', 317: 'Swalot',
+  318: 'Carvanha', 319: 'Sharpedo', 320: 'Wailmer', 321: 'Wailord', 322: 'Numel', 323: 'Camerupt',
+  324: 'Torkoal', 325: 'Spoink', 326: 'Grumpig', 327: 'Spinda', 328: 'Trapinch', 329: 'Vibrava',
+  330: 'Flygon', 331: 'Cacnea', 332: 'Cacturne', 333: 'Swablu', 334: 'Altaria', 335: 'Zangoose',
+  336: 'Seviper', 337: 'Lunatone', 338: 'Solrock', 339: 'Barboach', 340: 'Whiscash', 341: 'Corphish',
+  342: 'Crawdaunt', 343: 'Baltoy', 344: 'Claydol', 345: 'Lileep', 346: 'Cradily', 347: 'Anorith',
+  348: 'Armaldo', 349: 'Feebas', 350: 'Milotic', 351: 'Castform', 352: 'Kecleon', 353: 'Shuppet',
+  354: 'Banette', 355: 'Duskull', 356: 'Dusclops', 357: 'Tropius', 358: 'Chimecho', 359: 'Absol',
+  360: 'Wynaut', 361: 'Snorunt', 362: 'Glalie', 363: 'Spheal', 364: 'Sealeo', 365: 'Walrein',
+  366: 'Clamperl', 367: 'Huntail', 368: 'Gorebyss', 369: 'Relicanth', 370: 'Luvdisc', 371: 'Bagon',
+  372: 'Shelgon', 373: 'Salamence', 374: 'Beldum', 375: 'Metang', 376: 'Metagross', 377: 'Regirock',
+  378: 'Regice', 379: 'Registeel', 380: 'Latias', 381: 'Latios', 382: 'Kyogre', 383: 'Groudon',
+  384: 'Rayquaza', 385: 'Jirachi', 386: 'Deoxys',
+  // Gen 4
+  387: 'Turtwig', 388: 'Grotle', 389: 'Torterra', 390: 'Chimchar', 391: 'Monferno', 392: 'Infernape',
+  393: 'Piplup', 394: 'Prinplup', 395: 'Empoleon', 396: 'Starly', 397: 'Staravia', 398: 'Staraptor',
+  399: 'Bidoof', 400: 'Bibarel', 401: 'Kricketot', 402: 'Kricketune', 403: 'Shinx', 404: 'Luxio',
+  405: 'Luxray', 406: 'Budew', 407: 'Roserade', 408: 'Cranidos', 409: 'Rampardos', 410: 'Shieldon',
+  411: 'Bastiodon', 412: 'Burmy', 413: 'Wormadam', 414: 'Mothim', 415: 'Combee', 416: 'Vespiquen',
+  417: 'Pachirisu', 418: 'Buizel', 419: 'Floatzel', 420: 'Cherubi', 421: 'Cherrim', 422: 'Shellos',
+  423: 'Gastrodon', 424: 'Ambipom', 425: 'Drifloon', 426: 'Drifblim', 427: 'Buneary', 428: 'Lopunny',
+  429: 'Mismagius', 430: 'Honchkrow', 431: 'Glameow', 432: 'Purugly', 433: 'Chingling', 434: 'Stunky',
+  435: 'Skuntank', 436: 'Bronzor', 437: 'Bronzong', 438: 'Bonsly', 439: 'Mime Jr.', 440: 'Happiny',
+  441: 'Chatot', 442: 'Spiritomb', 443: 'Gible', 444: 'Gabite', 445: 'Garchomp', 446: 'Munchlax',
+  447: 'Riolu', 448: 'Lucario', 449: 'Hippopotas', 450: 'Hippowdon', 451: 'Skorupi', 452: 'Drapion',
+  453: 'Croagunk', 454: 'Toxicroak', 455: 'Carnivine', 456: 'Finneon', 457: 'Lumineon', 458: 'Mantyke',
+  459: 'Snover', 460: 'Abomasnow', 461: 'Weavile', 462: 'Magnezone', 463: 'Lickilicky', 464: 'Rhyperior',
+  465: 'Tangrowth', 466: 'Electivire', 467: 'Magmortar', 468: 'Togekiss', 469: 'Yanmega', 470: 'Leafeon',
+  471: 'Glaceon', 472: 'Gliscor', 473: 'Mamoswine', 474: 'Porygon-Z', 475: 'Gallade', 476: 'Probopass',
+  477: 'Dusknoir', 478: 'Froslass', 479: 'Rotom', 480: 'Uxie', 481: 'Mesprit', 482: 'Azelf',
+  483: 'Dialga', 484: 'Palkia', 485: 'Heatran', 486: 'Regigigas', 487: 'Giratina', 488: 'Cresselia',
+  489: 'Phione', 490: 'Manaphy', 491: 'Darkrai', 492: 'Shaymin', 493: 'Arceus'
 };
+
+// === Pokémon Rarity and Catch Rates ===
+const pokemonRarity = {
+  // Legendary (5% catch rate)
+  legendary: [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251],
+  // Mythical/Rare (15% catch rate)
+  rare: [106, 107, 113, 122, 131, 132, 142, 143],
+  // Uncommon (40% catch rate)
+  uncommon: [2, 5, 8, 11, 14, 17, 20, 22, 24, 26, 28, 30, 31, 33, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 62, 64, 65, 67, 68, 70, 71, 73, 75, 76, 78, 80, 82, 85, 87, 89, 91, 93, 94, 97, 99, 101, 103, 105, 110, 112, 117, 119, 121, 130, 139, 141, 148, 149],
+  // Common (70% catch rate) - everything else
+};
+
+function getCatchRate(pokemonId) {
+  if (pokemonRarity.legendary.includes(pokemonId)) return 0.05;
+  if (pokemonRarity.rare.includes(pokemonId)) return 0.15;
+  if (pokemonRarity.uncommon.includes(pokemonId)) return 0.40;
+  return 0.70; // Common
+}
+
+function getRarityName(pokemonId) {
+  if (pokemonRarity.legendary.includes(pokemonId)) return 'Legendary';
+  if (pokemonRarity.rare.includes(pokemonId)) return 'Rare';
+  if (pokemonRarity.uncommon.includes(pokemonId)) return 'Uncommon';
+  return 'Common';
+}
 
 function createThrownPball() {
   const ball = document.createElement('div');
@@ -304,6 +407,31 @@ function createThrownPball() {
   document.body.appendChild(ball);
   return ball;
 }
+// === Pokémon Rarity and Catch Rates ===
+const pokemonRarity = {
+  // Legendary (5% catch rate)
+  legendary: [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493],
+  // Mythical/Rare (15% catch rate)
+  rare: [106, 107, 113, 122, 131, 132, 142, 143, 201, 225, 233, 236, 238, 239, 240, 298, 360, 374, 433, 438, 439, 440, 446, 447, 458],
+  // Uncommon (40% catch rate)
+  uncommon: [2, 5, 8, 11, 14, 17, 20, 22, 24, 26, 28, 30, 31, 33, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 62, 64, 65, 67, 68, 70, 71, 73, 75, 76, 78, 80, 82, 85, 87, 89, 91, 93, 94, 97, 99, 101, 103, 105, 110, 112, 117, 119, 121, 130, 139, 141, 148, 149, 154, 157, 160, 162, 164, 166, 168, 169, 171, 178, 181, 182, 184, 185, 186, 189, 192, 195, 196, 197, 199, 205, 208, 210, 212, 214, 217, 219, 221, 224, 226, 229, 230, 232, 242, 254, 257, 260, 262, 264, 267, 269, 272, 275, 277, 279, 282, 284, 286, 289, 295, 297, 306, 308, 310, 319, 321, 323, 330, 332, 334, 337, 338, 340, 342, 344, 346, 348, 350, 362, 365, 367, 368, 373, 376, 389, 392, 395, 398, 400, 402, 405, 407, 409, 411, 413, 414, 416, 417, 419, 423, 424, 426, 428, 429, 430, 432, 435, 437, 445, 448, 450, 452, 454, 455, 457, 460, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479],
+  // Common (70% catch rate) - everything else
+};
+
+function getCatchRate(pokemonId) {
+  if (pokemonRarity.legendary.includes(pokemonId)) return 0.05;
+  if (pokemonRarity.rare.includes(pokemonId)) return 0.15;
+  if (pokemonRarity.uncommon.includes(pokemonId)) return 0.40;
+  return 0.70; // Common
+}
+
+function getRarityName(pokemonId) {
+  if (pokemonRarity.legendary.includes(pokemonId)) return 'Legendary';
+  if (pokemonRarity.rare.includes(pokemonId)) return 'Rare';
+  if (pokemonRarity.uncommon.includes(pokemonId)) return 'Uncommon';
+  return 'Common';
+}
+
 
 function spawnSparkles(x, y) {
   const symbols = ['✦', '★', '✧', '⚡'];
@@ -345,40 +473,58 @@ function catchPokemon(img) {
   });
 
   setTimeout(() => {
-    img.classList.add('catching', 'caught');
+    img.classList.add('catching');
     ball.classList.remove('throwing');
+
+    // Get Pokémon ID and catch rate
+    const src = img.src;
+    const idMatch = src.match(/\/(\d+)\./);
+    const pokemonId = idMatch ? parseInt(idMatch[1]) : 1;
+    const catchRate = getCatchRate(pokemonId);
+    const rarity = getRarityName(pokemonId);
+    const name = pokemonNames[pokemonId] || 'Pokémon';
 
     let wobbles = 0;
     const maxWobbles = 3;
 
     function doWobble() {
       if (wobbles >= maxWobbles) {
-        ball.classList.add('catch-success');
-        spawnSparkles(targetX + 14, targetY + 14);
+        // Check if catch is successful based on catch rate
+        const catchSuccess = Math.random() < catchRate;
+        
+        if (catchSuccess) {
+          // Successful catch
+          ball.classList.add('catch-success');
+          img.classList.add('caught');
+          spawnSparkles(targetX + 14, targetY + 14);
+          showPopup(`Gotcha! ${name} was caught! (${rarity})`);
 
-        const src = img.src;
-        const idMatch = src.match(/\/(\d+)\./);
-        const name = idMatch ? (pokemonNames[idMatch[1]] || 'Pokémon') : 'Pokémon';
-        showPopup(`Gotcha! ${name}!`);
-
-        setTimeout(() => {
-          ball.remove();
           setTimeout(() => {
+            ball.remove();
+            setTimeout(() => {
+              img.classList.remove('catching', 'caught');
+              img.classList.add('caught-return');
+
+              const clearCatching = () => {
+                img.classList.remove('caught-return', 'poke-hover');
+                delete img.dataset.catching;
+              };
+
+              img.addEventListener('animationend', clearCatching, { once: true });
+              setTimeout(clearCatching, 700);
+            }, 1500);
+          }, 400);
+        } else {
+          // Failed catch
+          ball.classList.add('catch-fail');
+          showPopup(`${name} broke free! (${rarity})`);
+          
+          setTimeout(() => {
+            ball.remove();
             img.classList.remove('catching', 'caught');
-            img.classList.add('caught-return');
-
-            // Fallback: clear catching flag after animation time even if event doesn't fire
-            const clearCatching = () => {
-              img.classList.remove('caught-return', 'poke-hover');
-              delete img.dataset.catching;
-            };
-
-            img.addEventListener('animationend', clearCatching, { once: true });
-
-            // Fallback timeout in case animationend doesn't fire
-            setTimeout(clearCatching, 700);
-          }, 1500);
-        }, 400);
+            delete img.dataset.catching;
+          }, 800);
+        }
         return;
       }
 

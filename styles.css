@@ -462,6 +462,10 @@ body::before {
   animation: catchSuccess 0.3s ease-out forwards;
 }
 
+.thrown-pball.catch-fail {
+  animation: catchFail 0.6s ease-out forwards;
+}
+
 @keyframes catchSuccess {
   0% {
     transform: scale(1);
@@ -478,6 +482,32 @@ body::before {
   }
 }
 
+@keyframes catchFail {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  
+  20% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  
+  40% {
+    transform: scale(1.2) rotate(-10deg);
+  }
+  
+  60% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  80% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  
+  100% {
+    transform: scale(0.5) translateY(-50px);
+    opacity: 0;
+  }
+}
 /* === Catch Sparkles === */
 .catch-sparkle {
   position: fixed;
