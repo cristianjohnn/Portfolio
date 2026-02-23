@@ -247,6 +247,302 @@ const evolutionChains = {
   149: [147, 148, 149],
   150: [150],            // Mewtwo (no evolution)
   151: [151],            // Mew (no evolution)
+  // Gen 2
+  152: [152, 153, 154],  // Chikorita → Bayleef → Meganium
+  153: [152, 153, 154],
+  154: [152, 153, 154],
+  155: [155, 156, 157],  // Cyndaquil → Quilava → Typhlosion
+  156: [155, 156, 157],
+  157: [155, 156, 157],
+  158: [158, 159, 160],  // Totodile → Croconaw → Feraligatr
+  159: [158, 159, 160],
+  160: [158, 159, 160],
+  161: [161, 162],       // Sentret → Furret
+  162: [161, 162],
+  163: [163, 164],       // Hoothoot → Noctowl
+  164: [163, 164],
+  165: [165, 166],       // Ledyba → Ledian
+  166: [165, 166],
+  167: [167, 168],       // Spinarak → Ariados
+  168: [167, 168],
+  172: [172, 25, 26],    // Pichu → Pikachu → Raichu
+  173: [173, 35, 36],    // Cleffa → Clefairy → Clefable
+  174: [174, 39, 40],    // Igglybuff → Jigglypuff → Wigglytuff
+  175: [175, 176],       // Togepi → Togetic
+  176: [175, 176],
+  177: [177, 178],       // Natu → Xatu
+  178: [177, 178],
+  179: [179, 180, 181],  // Mareep → Flaaffy → Ampharos
+  180: [179, 180, 181],
+  181: [179, 180, 181],
+  183: [183, 184],       // Marill → Azumarill
+  184: [183, 184],
+  187: [187, 188, 189],  // Hoppip → Skiploom → Jumpluff
+  188: [187, 188, 189],
+  189: [187, 188, 189],
+  190: [190],            // Aipom
+  191: [191, 192],       // Sunkern → Sunflora
+  192: [191, 192],
+  193: [193],            // Yanma
+  194: [194, 195],       // Wooper → Quagsire
+  195: [194, 195],
+  196: [133, 196],       // Eevee → Espeon
+  197: [133, 197],       // Eevee → Umbreon
+  198: [198],            // Murkrow
+  200: [200],            // Misdreavus
+  201: [201],            // Unown
+  203: [203],            // Girafarig
+  206: [206],            // Dunsparce
+  209: [209, 210],       // Snubbull → Granbull
+  210: [209, 210],
+  213: [213],            // Shuckle
+  215: [215],            // Sneasel
+  216: [216, 217],       // Teddiursa → Ursaring
+  217: [216, 217],
+  218: [218, 219],       // Slugma → Magcargo
+  219: [218, 219],
+  220: [220, 221],       // Swinub → Piloswine
+  221: [220, 221],
+  223: [223, 224],       // Remoraid → Octillery
+  224: [223, 224],
+  225: [225],            // Delibird
+  227: [227],            // Skarmory
+  228: [228, 229],       // Houndour → Houndoom
+  229: [228, 229],
+  231: [231, 232],       // Phanpy → Donphan
+  232: [231, 232],
+  234: [234],            // Stantler
+  236: [236],            // Tyrogue
+  238: [238, 124],       // Smoochum → Jynx
+  239: [239, 125],       // Elekid → Electabuzz
+  240: [240, 126],       // Magby → Magmar
+  241: [241],            // Miltank
+  243: [243],            // Raikou
+  244: [244],            // Entei
+  245: [245],            // Suicune
+  246: [246, 247, 248],  // Larvitar → Pupitar → Tyranitar
+  247: [246, 247, 248],
+  248: [246, 247, 248],
+  249: [249],            // Lugia
+  250: [250],            // Ho-Oh
+  251: [251],            // Celebi
+  // Gen 3
+  252: [252, 253, 254],  // Treecko → Grovyle → Sceptile
+  253: [252, 253, 254],
+  254: [252, 253, 254],
+  255: [255, 256, 257],  // Torchic → Combusken → Blaziken
+  256: [255, 256, 257],
+  257: [255, 256, 257],
+  258: [258, 259, 260],  // Mudkip → Marshtomp → Swampert
+  259: [258, 259, 260],
+  260: [258, 259, 260],
+  261: [261, 262],       // Poochyena → Mightyena
+  262: [261, 262],
+  263: [263, 264],       // Zigzagoon → Linoone
+  264: [263, 264],
+  265: [265, 266, 267],  // Wurmple → Silcoon → Beautifly
+  266: [265, 266, 267],
+  267: [265, 266, 267],
+  268: [265, 268, 269],  // Wurmple → Cascoon → Dustox
+  269: [265, 268, 269],
+  270: [270, 271, 272],  // Lotad → Lombre → Ludicolo
+  271: [270, 271, 272],
+  272: [270, 271, 272],
+  273: [273, 274, 275],  // Seedot → Nuzleaf → Shiftry
+  274: [273, 274, 275],
+  275: [273, 274, 275],
+  276: [276, 277],       // Taillow → Swellow
+  277: [276, 277],
+  278: [278, 279],       // Wingull → Pelipper
+  279: [278, 279],
+  280: [280, 281, 282],  // Ralts → Kirlia → Gardevoir
+  281: [280, 281, 282],
+  282: [280, 281, 282],
+  283: [283, 284],       // Surskit → Masquerain
+  284: [283, 284],
+  285: [285, 286],       // Shroomish → Breloom
+  286: [285, 286],
+  287: [287, 288, 289],  // Slakoth → Vigoroth → Slaking
+  288: [287, 288, 289],
+  289: [287, 288, 289],
+  290: [290, 291],       // Nincada → Ninjask
+  291: [290, 291],
+  293: [293, 294, 295],  // Whismur → Loudred → Exploud
+  294: [293, 294, 295],
+  295: [293, 294, 295],
+  296: [296, 297],       // Makuhita → Hariyama
+  297: [296, 297],
+  298: [298, 183, 184],  // Azurill → Marill → Azumarill
+  300: [300, 301],       // Skitty → Delcatty
+  301: [300, 301],
+  302: [302],            // Sableye
+  304: [304, 305, 306],  // Aron → Lairon → Aggron
+  305: [304, 305, 306],
+  306: [304, 305, 306],
+  307: [307, 308],       // Meditite → Medicham
+  308: [307, 308],
+  309: [309, 310],       // Electrike → Manectric
+  310: [309, 310],
+  311: [311],            // Plusle
+  312: [312],            // Minun
+  315: [315],            // Roselia
+  316: [316, 317],       // Gulpin → Swalot
+  317: [316, 317],
+  318: [318, 319],       // Carvanha → Sharpedo
+  319: [318, 319],
+  320: [320, 321],       // Wailmer → Wailord
+  321: [320, 321],
+  322: [322, 323],       // Numel → Camerupt
+  323: [322, 323],
+  325: [325, 326],       // Spoink → Grumpig
+  326: [325, 326],
+  327: [327],            // Spinda
+  328: [328, 329, 330],  // Trapinch → Vibrava → Flygon
+  329: [328, 329, 330],
+  330: [328, 329, 330],
+  331: [331, 332],       // Cacnea → Cacturne
+  332: [331, 332],
+  333: [333, 334],       // Swablu → Altaria
+  334: [333, 334],
+  335: [335],            // Zangoose
+  336: [336],            // Seviper
+  337: [337],            // Lunatone
+  338: [338],            // Solrock
+  339: [339, 340],       // Barboach → Whiscash
+  340: [339, 340],
+  341: [341, 342],       // Corphish → Crawdaunt
+  342: [341, 342],
+  343: [343, 344],       // Baltoy → Claydol
+  344: [343, 344],
+  345: [345, 346],       // Lileep → Cradily
+  346: [345, 346],
+  347: [347, 348],       // Anorith → Armaldo
+  348: [347, 348],
+  349: [349, 350],       // Feebas → Milotic
+  350: [349, 350],
+  351: [351],            // Castform
+  352: [352],            // Kecleon
+  353: [353, 354],       // Shuppet → Banette
+  354: [353, 354],
+  355: [355, 356],       // Duskull → Dusclops
+  356: [355, 356],
+  359: [359],            // Absol
+  360: [360],            // Wynaut
+  361: [361, 362],       // Snorunt → Glalie
+  362: [361, 362],
+  363: [363, 364, 365],  // Spheal → Sealeo → Walrein
+  364: [363, 364, 365],
+  365: [363, 364, 365],
+  366: [366, 367],       // Clamperl → Huntail
+  367: [366, 367],
+  368: [366, 368],       // Clamperl → Gorebyss
+  369: [369],            // Relicanth
+  370: [370],            // Luvdisc
+  371: [371, 372, 373],  // Bagon → Shelgon → Salamence
+  372: [371, 372, 373],
+  373: [371, 372, 373],
+  374: [374, 375, 376],  // Beldum → Metang → Metagross
+  375: [374, 375, 376],
+  376: [374, 375, 376],
+  377: [377],            // Regirock
+  378: [378],            // Regice
+  379: [379],            // Registeel
+  380: [380],            // Latias
+  381: [381],            // Latios
+  382: [382],            // Kyogre
+  383: [383],            // Groudon
+  384: [384],            // Rayquaza
+  385: [385],            // Jirachi
+  386: [386],            // Deoxys
+  // Gen 4
+  387: [387, 388, 389],  // Turtwig → Grotle → Torterra
+  388: [387, 388, 389],
+  389: [387, 388, 389],
+  390: [390, 391, 392],  // Chimchar → Monferno → Infernape
+  391: [390, 391, 392],
+  392: [390, 391, 392],
+  393: [393, 394, 395],  // Piplup → Prinplup → Empoleon
+  394: [393, 394, 395],
+  395: [393, 394, 395],
+  396: [396, 397, 398],  // Starly → Staravia → Staraptor
+  397: [396, 397, 398],
+  398: [396, 397, 398],
+  399: [399, 400],       // Bidoof → Bibarel
+  400: [399, 400],
+  401: [401, 402],       // Kricketot → Kricketune
+  402: [401, 402],
+  403: [403, 404, 405],  // Shinx → Luxio → Luxray
+  404: [403, 404, 405],
+  405: [403, 404, 405],
+  406: [406, 315, 407],  // Budew → Roselia → Roserade
+  407: [406, 315, 407],
+  408: [408, 409],       // Cranidos → Rampardos
+  409: [408, 409],
+  410: [410, 411],       // Shieldon → Bastiodon
+  411: [410, 411],
+  412: [412, 413],       // Burmy → Wormadam
+  413: [412, 413],
+  414: [412, 414],       // Burmy → Mothim
+  415: [415, 416],       // Combee → Vespiquen
+  416: [415, 416],
+  417: [417],            // Pachirisu
+  418: [418, 419],       // Buizel → Floatzel
+  419: [418, 419],
+  420: [420, 421],       // Cherubi → Cherrim
+  421: [420, 421],
+  422: [422, 423],       // Shellos → Gastrodon
+  423: [422, 423],
+  425: [425, 426],       // Drifloon → Drifblim
+  426: [425, 426],
+  427: [427, 428],       // Buneary → Lopunny
+  428: [427, 428],
+  431: [431, 432],       // Glameow → Purugly
+  432: [431, 432],
+  433: [433],            // Chingling
+  434: [434, 435],       // Stunky → Skuntank
+  435: [434, 435],
+  436: [436, 437],       // Bronzor → Bronzong
+  437: [436, 437],
+  438: [438],            // Bonsly
+  439: [439, 122],       // Mime Jr. → Mr. Mime
+  440: [440, 113],       // Happiny → Chansey
+  441: [441],            // Chatot
+  442: [442],            // Spiritomb
+  443: [443, 444, 445],  // Gible → Gabite → Garchomp
+  444: [443, 444, 445],
+  445: [443, 444, 445],
+  446: [446, 143],       // Munchlax → Snorlax
+  447: [447, 448],       // Riolu → Lucario
+  448: [447, 448],
+  449: [449, 450],       // Hippopotas → Hippowdon
+  450: [449, 450],
+  451: [451, 452],       // Skorupi → Drapion
+  452: [451, 452],
+  453: [453, 454],       // Croagunk → Toxicroak
+  454: [453, 454],
+  455: [455],            // Carnivine
+  456: [456, 457],       // Finneon → Lumineon
+  457: [456, 457],
+  458: [458, 226],       // Mantyke → Mantine
+  459: [459, 460],       // Snover → Abomasnow
+  460: [459, 460],
+  470: [133, 470],       // Eevee → Leafeon
+  471: [133, 471],       // Eevee → Glaceon
+  475: [280, 281, 475],  // Ralts → Kirlia → Gallade
+  480: [480],            // Uxie
+  481: [481],            // Mesprit
+  482: [482],            // Azelf
+  483: [483],            // Dialga
+  484: [484],            // Palkia
+  485: [485],            // Heatran
+  486: [486],            // Regigigas
+  487: [487],            // Giratina
+  488: [488],            // Cresselia
+  489: [489],            // Phione
+  490: [490],            // Manaphy
+  491: [491],            // Darkrai
+  492: [492],            // Shaymin
+  493: [493],            // Arceus
 };
 
 let evoStage = 0;
@@ -448,7 +744,7 @@ function catchPokemon(img) {
   });
 
   setTimeout(() => {
-    img.classList.add('catching');
+    img.classList.add('catching', 'caught'); // Add caught immediately to make it disappear
     ball.classList.remove('throwing');
 
     // Get Pokémon ID and catch rate
@@ -470,7 +766,6 @@ function catchPokemon(img) {
         if (catchSuccess) {
           // Successful catch
           ball.classList.add('catch-success');
-          img.classList.add('caught');
           spawnSparkles(targetX + 14, targetY + 14);
           showPopup(`Gotcha! ${name} was caught! (${rarity})`);
 
@@ -490,13 +785,14 @@ function catchPokemon(img) {
             }, 1500);
           }, 400);
         } else {
-          // Failed catch
+          // Failed catch - Pokémon breaks free
           ball.classList.add('catch-fail');
+          img.classList.remove('caught'); // Make Pokémon reappear
           showPopup(`${name} broke free! (${rarity})`);
           
           setTimeout(() => {
             ball.remove();
-            img.classList.remove('catching', 'caught');
+            img.classList.remove('catching');
             delete img.dataset.catching;
           }, 800);
         }
