@@ -249,7 +249,7 @@ body::before {
 /* === Ball Selector (Vertical) === */
 .ball-selector-vertical {
   position: fixed;
-  top: 8rem;
+  top: 12rem;
   left: 1.5rem;
   display: flex;
   flex-direction: column;

@@ -172,8 +172,9 @@ const evolutionChains = {
   38: [37, 38],
   39: [39, 40],          // Jigglypuff → Wigglytuff
   40: [39, 40],
-  41: [41, 42],          // Zubat → Golbat
-  42: [41, 42],
+  41: [41, 42, 169],     // Zubat → Golbat → Crobat
+  42: [41, 42, 169],
+  169: [41, 42, 169],
   43: [43, 44, 45],      // Oddish → Gloom → Vileplume
   44: [43, 44, 45],
   45: [43, 44, 45],
@@ -212,8 +213,9 @@ const evolutionChains = {
   78: [77, 78],
   79: [79, 80],          // Slowpoke → Slowbro
   80: [79, 80],
-  81: [81, 82],          // Magnemite → Magneton
-  82: [81, 82],
+  81: [81, 82, 462],     // Magnemite → Magneton → Magnezone
+  82: [81, 82, 462],
+  462: [81, 82, 462],
   83: [83],              // Farfetch'd (no evolution)
   84: [84, 85],          // Doduo → Dodrio
   85: [84, 85],
@@ -226,7 +228,8 @@ const evolutionChains = {
   92: [92, 93, 94],      // Gastly → Haunter → Gengar
   93: [92, 93, 94],
   94: [92, 93, 94],
-  95: [95],              // Onix (no evolution in Gen 1)
+  95: [95, 208],         // Onix → Steelix
+  208: [95, 208],
   96: [96, 97],          // Drowzee → Hypno
   97: [96, 97],
   98: [98, 99],          // Krabby → Kingler
@@ -237,36 +240,50 @@ const evolutionChains = {
   103: [102, 103],
   104: [104, 105],       // Cubone → Marowak
   105: [104, 105],
-  108: [108],            // Lickitung (no evolution in Gen 1)
+  108: [108, 463],       // Lickitung → Lickilicky
+  463: [108, 463],
   109: [109, 110],       // Koffing → Weezing
   110: [109, 110],
-  111: [111, 112],       // Rhyhorn → Rhydon
-  112: [111, 112],
-  113: [113],            // Chansey (no evolution in Gen 1)
-  114: [114],            // Tangela (no evolution in Gen 1)
+  111: [111, 112, 464],  // Rhyhorn → Rhydon → Rhyperior
+  112: [111, 112, 464],
+  464: [111, 112, 464],
+  113: [113, 242],       // Chansey → Blissey
+  242: [113, 242],
+  114: [114, 465],       // Tangela → Tangrowth
+  465: [114, 465],
   115: [115],            // Kangaskhan (no evolution)
-  116: [116, 117],       // Horsea → Seadra
-  117: [116, 117],
+  116: [116, 117, 230],  // Horsea → Seadra → Kingdra
+  117: [116, 117, 230],
+  230: [116, 117, 230],
   118: [118, 119],       // Goldeen → Seaking
   119: [118, 119],
   120: [120, 121],       // Staryu → Starmie
   121: [120, 121],
   122: [122],            // Mr. Mime (no evolution)
-  123: [123],            // Scyther (no evolution in Gen 1)
+  123: [123, 212],       // Scyther → Scizor
+  212: [123, 212],
   124: [124],            // Jynx (no evolution in Gen 1)
-  125: [125],            // Electabuzz (no evolution in Gen 1)
-  126: [126],            // Magmar (no evolution in Gen 1)
+  125: [125, 466],       // Electabuzz → Electivire
+  466: [125, 466],
+  126: [126, 467],       // Magmar → Magmortar
+  467: [126, 467],
   127: [127],            // Pinsir (no evolution)
   128: [128],            // Tauros (no evolution)
   129: [129, 130],       // Magikarp → Gyarados
   130: [129, 130],
   131: [131],            // Lapras (no evolution)
   132: [132],            // Ditto (no evolution)
-  133: [133, 134, 135, 136], // Eevee → Vaporeon/Jolteon/Flareon
-  134: [133, 134, 135, 136],
-  135: [133, 134, 135, 136],
-  136: [133, 134, 135, 136],
-  137: [137],            // Porygon (no evolution in Gen 1)
+  133: [133, 134, 135, 136, 196, 197, 470, 471], // Eevee → All Eeveelutions
+  134: [133, 134, 135, 136, 196, 197, 470, 471],
+  135: [133, 134, 135, 136, 196, 197, 470, 471],
+  136: [133, 134, 135, 136, 196, 197, 470, 471],
+  196: [133, 134, 135, 136, 196, 197, 470, 471],
+  197: [133, 134, 135, 136, 196, 197, 470, 471],
+  470: [133, 134, 135, 136, 196, 197, 470, 471],
+  471: [133, 134, 135, 136, 196, 197, 470, 471],
+  137: [137, 233, 474], // Porygon → Porygon2 → Porygon-Z
+  233: [137, 233, 474],
+  474: [137, 233, 474],
   138: [138, 139],       // Omanyte → Omastar
   139: [138, 139],
   140: [140, 141],       // Kabuto → Kabutops
@@ -299,8 +316,9 @@ const evolutionChains = {
   172: [172, 25, 26],    // Pichu → Pikachu → Raichu
   173: [173, 35, 36],    // Cleffa → Clefairy → Clefable
   174: [174, 39, 40],    // Igglybuff → Jigglypuff → Wigglytuff
-  175: [175, 176],       // Togepi → Togetic
-  176: [175, 176],
+  175: [175, 176, 468],  // Togepi → Togetic → Togekiss
+  176: [175, 176, 468],
+  468: [175, 176, 468],
   177: [177, 178],       // Natu → Xatu
   178: [177, 178],
   179: [179, 180, 181],  // Mareep → Flaaffy → Ampharos
@@ -311,29 +329,34 @@ const evolutionChains = {
   187: [187, 188, 189],  // Hoppip → Skiploom → Jumpluff
   188: [187, 188, 189],
   189: [187, 188, 189],
-  190: [190],            // Aipom
+  190: [190, 424],       // Aipom → Ambipom
+  424: [190, 424],
   191: [191, 192],       // Sunkern → Sunflora
   192: [191, 192],
-  193: [193],            // Yanma
+  193: [193, 469],       // Yanma → Yanmega
+  469: [193, 469],
   194: [194, 195],       // Wooper → Quagsire
   195: [194, 195],
-  196: [133, 196],       // Eevee → Espeon
-  197: [133, 197],       // Eevee → Umbreon
-  198: [198],            // Murkrow
-  200: [200],            // Misdreavus
+  198: [198, 430],       // Murkrow → Honchkrow
+  430: [198, 430],
+  200: [200, 429],       // Misdreavus → Mismagius
+  429: [200, 429],
   201: [201],            // Unown
   203: [203],            // Girafarig
-  206: [206],            // Dunsparce
+  207: [207, 472],       // Gligar → Gliscor
+  472: [207, 472],
   209: [209, 210],       // Snubbull → Granbull
   210: [209, 210],
   213: [213],            // Shuckle
-  215: [215],            // Sneasel
+  215: [215, 461],       // Sneasel → Weavile
+  461: [215, 461],
   216: [216, 217],       // Teddiursa → Ursaring
   217: [216, 217],
   218: [218, 219],       // Slugma → Magcargo
   219: [218, 219],
-  220: [220, 221],       // Swinub → Piloswine
-  221: [220, 221],
+  220: [220, 221, 473],  // Swinub → Piloswine → Mamoswine
+  221: [220, 221, 473],
+  473: [220, 221, 473],
   223: [223, 224],       // Remoraid → Octillery
   224: [223, 224],
   225: [225],            // Delibird
@@ -455,12 +478,14 @@ const evolutionChains = {
   352: [352],            // Kecleon
   353: [353, 354],       // Shuppet → Banette
   354: [353, 354],
-  355: [355, 356],       // Duskull → Dusclops
-  356: [355, 356],
+  355: [355, 356, 477],  // Duskull → Dusclops → Dusknoir
+  356: [355, 356, 477],
+  477: [355, 356, 477],
   359: [359],            // Absol
   360: [360],            // Wynaut
-  361: [361, 362],       // Snorunt → Glalie
-  362: [361, 362],
+  361: [361, 362, 478],  // Snorunt → Glalie / Froslass
+  362: [361, 362, 478],
+  478: [361, 362, 478],
   363: [363, 364, 365],  // Spheal → Sealeo → Walrein
   364: [363, 364, 365],
   365: [363, 364, 365],
@@ -704,24 +729,71 @@ const pokemonNames = {
 
 // === Pokémon Rarity and Catch Rates ===
 const pokemonRarity = {
-  // Legendary (5% catch rate)
-  legendary: [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251],
-  // Mythical/Rare (15% catch rate)
-  rare: [106, 107, 113, 122, 131, 132, 142, 143],
-  // Uncommon (40% catch rate)
-  uncommon: [2, 5, 8, 11, 14, 17, 20, 22, 24, 26, 28, 30, 31, 33, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 62, 64, 65, 67, 68, 70, 71, 73, 75, 76, 78, 80, 82, 85, 87, 89, 91, 93, 94, 97, 99, 101, 103, 105, 110, 112, 117, 119, 121, 130, 139, 141, 148, 149],
-  // Common (70% catch rate) - everything else
+  // Legendary (3% catch rate) - Box Legendaries and Trios
+  legendary: [
+    144, 145, 146, 150, // Gen 1: Articuno, Zapdos, Moltres, Mewtwo
+    243, 244, 245, 249, 250, // Gen 2: Raikou, Entei, Suicune, Lugia, Ho-Oh
+    377, 378, 379, 380, 381, 382, 383, 384, // Gen 3: Regis, Latis, Weather Trio, Rayquaza
+    480, 481, 482, 483, 484, 485, 486, 487, 488 // Gen 4: Lake Trio, Dialga, Palkia, Heatran, Regigigas, Giratina, Cresselia
+  ],
+  // Mythical (1% catch rate) - Event-only Pokémon
+  mythical: [
+    151, // Mew
+    251, // Celebi
+    385, 386, // Jirachi, Deoxys
+    489, 490, 491, 492, 493 // Phione, Manaphy, Darkrai, Shaymin, Arceus
+  ],
+  // Pseudo-Legendary (8% catch rate) - 600 BST final evolutions
+  pseudoLegendary: [
+    149, // Dragonite
+    248, // Tyranitar
+    373, // Salamence
+    376, // Metagross
+    445 // Garchomp
+  ],
+  // Rare (12% catch rate) - Fossils, Baby Pokémon, Special evolutions
+  rare: [
+    106, 107, 113, 122, 131, 132, 142, 143, // Gen 1: Hitmons, Chansey, Mr. Mime, Lapras, Ditto, Aerodactyl, Snorlax
+    172, 173, 174, 175, 201, 225, 233, 236, 238, 239, 240, 298, // Gen 2: Babies, Unown, Delibird, Porygon2, Tyrogue, Elekid, Magby, Azurill
+    302, 303, 359, 360, 374, 433, 438, 439, 440, 446, 447, 458 // Gen 3-4: Sableye, Mawile, Absol, Wynaut, Beldum, Chingling, Bonsly, Mime Jr., Happiny, Munchlax, Riolu, Mantyke
+  ],
+  // Uncommon (35% catch rate) - Second and third stage evolutions
+  uncommon: [
+    2, 5, 8, 11, 14, 17, 20, 22, 24, 26, 28, 30, 31, 33, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 62, 64, 65, 67, 68, 70, 71, 73, 75, 76, 78, 80, 82, 85, 87, 89, 91, 93, 94, 97, 99, 101, 103, 105, 110, 112, 117, 119, 121, 130, 139, 141, 148, // Gen 1 evolutions
+    153, 154, 156, 157, 159, 160, 162, 164, 166, 168, 169, 171, 176, 178, 181, 182, 184, 185, 186, 189, 192, 195, 196, 197, 199, 205, 208, 210, 212, 214, 217, 219, 221, 224, 226, 229, 230, 232, 242, // Gen 2 evolutions
+    253, 254, 256, 257, 259, 260, 262, 264, 267, 269, 272, 275, 277, 279, 282, 284, 286, 289, 291, 295, 297, 301, 306, 308, 310, 317, 319, 321, 323, 330, 332, 334, 340, 342, 344, 346, 348, 350, 354, 356, 362, 365, 367, 368, 373, // Gen 3 evolutions
+    388, 389, 391, 392, 394, 395, 397, 398, 400, 402, 404, 405, 407, 409, 411, 413, 414, 416, 419, 421, 423, 424, 426, 428, 429, 430, 432, 435, 437, 445, 448, 450, 452, 454, 457, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479 // Gen 4 evolutions
+  ],
+  // Common (70% catch rate) - First stage and single-stage Pokémon
 };
 
+// Get evolution stage (0 = base, 1 = stage 1, 2 = stage 2)
+function getEvolutionStage(pokemonId) {
+  const chain = evolutionChains[pokemonId];
+  if (!chain) return 0;
+  return chain.indexOf(pokemonId);
+}
+
 function getCatchRate(pokemonId) {
-  if (pokemonRarity.legendary.includes(pokemonId)) return 0.05;
-  if (pokemonRarity.rare.includes(pokemonId)) return 0.15;
-  if (pokemonRarity.uncommon.includes(pokemonId)) return 0.40;
-  return 0.70; // Common
+  const evolutionStage = getEvolutionStage(pokemonId);
+  
+  // Base catch rates by rarity
+  if (pokemonRarity.mythical.includes(pokemonId)) return 0.01; // 1%
+  if (pokemonRarity.legendary.includes(pokemonId)) return 0.03; // 3%
+  if (pokemonRarity.pseudoLegendary.includes(pokemonId)) return 0.08; // 8%
+  if (pokemonRarity.rare.includes(pokemonId)) return 0.12; // 12%
+  if (pokemonRarity.uncommon.includes(pokemonId)) return 0.35; // 35%
+  
+  // Common Pokémon - reduce catch rate based on evolution stage
+  const baseCatchRate = 0.70; // 70% for base form
+  const stageModifier = evolutionStage * 0.15; // -15% per evolution stage
+  return Math.max(baseCatchRate - stageModifier, 0.30); // Minimum 30%
 }
 
 function getRarityName(pokemonId) {
+  if (pokemonRarity.mythical.includes(pokemonId)) return 'Mythical';
   if (pokemonRarity.legendary.includes(pokemonId)) return 'Legendary';
+  if (pokemonRarity.pseudoLegendary.includes(pokemonId)) return 'Pseudo-Legendary';
   if (pokemonRarity.rare.includes(pokemonId)) return 'Rare';
   if (pokemonRarity.uncommon.includes(pokemonId)) return 'Uncommon';
   return 'Common';
