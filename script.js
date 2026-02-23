@@ -38,9 +38,19 @@ if (musicToggle && bgMusic) {
 let selectedBall = 'ultraball';
 let ballMultiplier = 2;
 
-const ballOptions = document.querySelectorAll('.ball-option');
+const ballOptions = document.querySelectorAll('.ball-option-vertical');
 ballOptions.forEach(option => {
   option.addEventListener('click', function() {
+    // If clicking the active ball, deselect it
+    if (this.classList.contains('active')) {
+      this.classList.remove('active');
+      selectedBall = null;
+      ballMultiplier = 0;
+      showPopup('No ball selected - catching disabled');
+      return;
+    }
+    
+    // Otherwise, select this ball
     ballOptions.forEach(opt => opt.classList.remove('active'));
     this.classList.add('active');
     selectedBall = this.dataset.ball;
@@ -738,9 +748,50 @@ function calculateWiggles(baseCatchRate, ballMultiplier) {
 function createThrownPball() {
   const ball = document.createElement('div');
   ball.className = 'thrown-pball';
-  ball.innerHTML = '<div class="tp-top"></div><div class="tp-bottom"></div><div class="tp-center"></div>';
+  
+  // Use selected ball image or default pokeball
+  const ballImage = selectedBall ? `${selectedBall}.png` : 'pokeball.png';
+  ball.innerHTML = `<img src="${ballImage}" style="width: 28px; height: 28px; display: block;">`;
+  
   document.body.appendChild(ball);
   return ball;
+}
+
+function spawnSuccessEffect(x, y) {
+  // Green flash overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'catch-effect-overlay success';
+  document.body.appendChild(overlay);
+  setTimeout(() => overlay.remove(), 800);
+  
+  // Three stars bursting out
+  const starPositions = [
+    { x: -60, y: -60 },
+    { x: 60, y: -60 },
+    { x: 0, y: -80 }
+  ];
+  
+  starPositions.forEach((pos, i) => {
+    setTimeout(() => {
+      const star = document.createElement('div');
+      star.className = 'catch-stars';
+      star.textContent = '⭐';
+      star.style.left = x + 'px';
+      star.style.top = y + 'px';
+      star.style.setProperty('--star-x', pos.x + 'px');
+      star.style.setProperty('--star-y', pos.y + 'px');
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 1000);
+    }, i * 100);
+  });
+}
+
+function spawnFailEffect() {
+  // Red flash overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'catch-effect-overlay fail';
+  document.body.appendChild(overlay);
+  setTimeout(() => overlay.remove(), 600);
 }
 
 function spawnSparkles(x, y) {
@@ -763,6 +814,13 @@ function spawnSparkles(x, y) {
 
 function catchPokemon(img) {
   if (img.dataset.catching) return;
+  
+  // Check if a ball is selected
+  if (!selectedBall) {
+    showPopup('Select a Poké Ball first!');
+    return;
+  }
+  
   img.dataset.catching = 'true';
 
   const rect = img.getBoundingClientRect();
@@ -807,6 +865,7 @@ function catchPokemon(img) {
           // Successful catch - 3 wiggles
           ball.classList.add('catch-success');
           spawnSparkles(targetX + 14, targetY + 14);
+          spawnSuccessEffect(targetX + 14, targetY + 14);
           showPopup(`Gotcha! ${name} was caught! (${rarity})`);
 
           setTimeout(() => {
@@ -828,6 +887,7 @@ function catchPokemon(img) {
           // Failed catch - 0, 1, or 2 wiggles
           ball.classList.add('catch-fail');
           img.classList.remove('caught'); // Pokémon breaks free
+          spawnFailEffect();
           
           const wiggleMessages = {
             0: `${name} broke free instantly! (${rarity})`,
@@ -1366,7 +1426,7 @@ const tooltipElements = {
   '.bg-pokemon': 'Click to catch!',
   '.music-toggle': 'Toggle background music',
   '.pokemon-randomizer': 'Randomize Pokémon!',
-  '.ball-option': 'Select your Poké Ball!'
+  '.ball-option-vertical': 'Select ball (click again to deselect)'
 };
 
 Object.entries(tooltipElements).forEach(([selector, text]) => {

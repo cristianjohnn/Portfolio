@@ -246,73 +246,61 @@ body::before {
   }
 }
 
-/* === Ball Selector === */
-.ball-selector {
+/* === Ball Selector (Vertical) === */
+.ball-selector-vertical {
   position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 8rem;
+  left: 1.5rem;
   display: flex;
-  gap: 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1rem 1.5rem;
-  border-radius: 50px;
-  border: 3px solid var(--pball-black);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  gap: 0.5rem;
   z-index: 100;
 }
 
-.ball-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border: 2px solid transparent;
-}
-
-.ball-option:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-5px);
-}
-
-.ball-option.active {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--pball-yellow);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-
-.ball-option img {
+.ball-option-vertical {
   width: 48px;
   height: 48px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.ball-option-vertical:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ball-option-vertical.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--pball-yellow);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  animation: ballPulse 1s ease infinite;
+}
+
+.ball-option-vertical img {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
   transition: transform 0.3s;
 }
 
-.ball-option:hover img {
-  transform: scale(1.2) rotate(10deg);
+.ball-option-vertical:hover img {
+  transform: scale(1.15);
 }
 
-.ball-option.active img {
-  animation: ballBounce 0.6s ease infinite;
-}
-
-.ball-name {
-  font-family: var(--font-pixel);
-  font-size: 0.7rem;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-@keyframes ballBounce {
+@keyframes ballPulse {
   0%, 100% {
-    transform: translateY(0);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
   }
   50% {
-    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -578,6 +566,68 @@ body::before {
     opacity: 0;
   }
 }
+
+/* === Catch Effect Overlays === */
+.catch-effect-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9997;
+}
+
+.catch-effect-overlay.success {
+  background: radial-gradient(circle at center, rgba(76, 175, 80, 0.4) 0%, transparent 70%);
+  animation: successFlash 0.8s ease-out;
+}
+
+.catch-effect-overlay.fail {
+  background: radial-gradient(circle at center, rgba(244, 67, 54, 0.4) 0%, transparent 70%);
+  animation: failFlash 0.6s ease-out;
+}
+
+@keyframes successFlash {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes failFlash {
+  0%, 100% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.catch-stars {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  font-size: 2rem;
+  animation: starBurst 1s ease-out forwards;
+}
+
+@keyframes starBurst {
+  0% {
+    transform: translate(0, 0) scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--star-x), var(--star-y)) scale(1.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 /* === Catch Sparkles === */
 .catch-sparkle {
   position: fixed;
