@@ -407,31 +407,6 @@ function createThrownPball() {
   document.body.appendChild(ball);
   return ball;
 }
-// === Pokémon Rarity and Catch Rates ===
-const pokemonRarity = {
-  // Legendary (5% catch rate)
-  legendary: [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493],
-  // Mythical/Rare (15% catch rate)
-  rare: [106, 107, 113, 122, 131, 132, 142, 143, 201, 225, 233, 236, 238, 239, 240, 298, 360, 374, 433, 438, 439, 440, 446, 447, 458],
-  // Uncommon (40% catch rate)
-  uncommon: [2, 5, 8, 11, 14, 17, 20, 22, 24, 26, 28, 30, 31, 33, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 62, 64, 65, 67, 68, 70, 71, 73, 75, 76, 78, 80, 82, 85, 87, 89, 91, 93, 94, 97, 99, 101, 103, 105, 110, 112, 117, 119, 121, 130, 139, 141, 148, 149, 154, 157, 160, 162, 164, 166, 168, 169, 171, 178, 181, 182, 184, 185, 186, 189, 192, 195, 196, 197, 199, 205, 208, 210, 212, 214, 217, 219, 221, 224, 226, 229, 230, 232, 242, 254, 257, 260, 262, 264, 267, 269, 272, 275, 277, 279, 282, 284, 286, 289, 295, 297, 306, 308, 310, 319, 321, 323, 330, 332, 334, 337, 338, 340, 342, 344, 346, 348, 350, 362, 365, 367, 368, 373, 376, 389, 392, 395, 398, 400, 402, 405, 407, 409, 411, 413, 414, 416, 417, 419, 423, 424, 426, 428, 429, 430, 432, 435, 437, 445, 448, 450, 452, 454, 455, 457, 460, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479],
-  // Common (70% catch rate) - everything else
-};
-
-function getCatchRate(pokemonId) {
-  if (pokemonRarity.legendary.includes(pokemonId)) return 0.05;
-  if (pokemonRarity.rare.includes(pokemonId)) return 0.15;
-  if (pokemonRarity.uncommon.includes(pokemonId)) return 0.40;
-  return 0.70; // Common
-}
-
-function getRarityName(pokemonId) {
-  if (pokemonRarity.legendary.includes(pokemonId)) return 'Legendary';
-  if (pokemonRarity.rare.includes(pokemonId)) return 'Rare';
-  if (pokemonRarity.uncommon.includes(pokemonId)) return 'Uncommon';
-  return 'Common';
-}
-
 
 function spawnSparkles(x, y) {
   const symbols = ['✦', '★', '✧', '⚡'];
